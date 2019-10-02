@@ -184,6 +184,7 @@ input.form-control.mr-sm-2 {
   background-color: wheat;
   color: maroon;
   border-radius: 2px;
+  border: 2px solid white;
   font-weight: bold;
   text-align: center;
 }

@@ -4,9 +4,9 @@
             <div class="col-md-12" style="font-size: 15px;">User Info
                 <hr>
                 <% if(user.profilePic) { %>
-                    <img style="border-radius: 2px;" src="<%= user.profilePic %>" alt="profile pic">
+                    <img style="border-radius: 10px;" src="<%= user.profilePic %>" alt="profile pic">
                 <% } else { %>
-                    <img style="border-radius: 8px;" src="./images/595865.jpg" alt="profile pic">
+                    <img style="border-radius: 20px;" src="./images/595865.jpg" alt="profile pic">
                 <% } %>
                 <hr>
                 <div class="col">Username : <%= user.username %></div>
@@ -38,7 +38,7 @@
                 Option
                 <hr>
                 <div class="col">
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" class="btn btn-success">
                         <a href="/update">Update</a>
                     </button>
                 </div>
