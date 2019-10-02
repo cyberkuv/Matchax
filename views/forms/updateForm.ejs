@@ -38,7 +38,7 @@
                             placeholder="Country Of Residence">
                     </div>
                     <div class="col">
-                        <button type="submit" class="btn btn-danger">Update</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                     </div>
                 </form>
             </div>
@@ -47,37 +47,42 @@
             <div class="col-md-12">
                 Upload Profile Picture @<%= user.firstname %>
                 <hr>
-                <button onclick="addimage()" type="" class="btn btn-success">Add</button>
                 <form action="/ppUpdate" method="post">
                     <div class="form-group">
-                        <br>
-                        <input id="images" class="form-control" name="profile" type="text" readonly />
+                        <input type="file" id="inp">
+                        <hr>
+                        <input type="text" class="form-control" name="profile" id="b64" readonly />
+                        <hr>
+                        <img height="200" id="img">
                     </div>
-                    <button type="submit" class="btn btn-danger">Upload</button>
+                    <button type="submit" class="btn btn-success">Upload</button>
+                </form>
+            </div>
+            <br>
+            <div class="col-md-12">
+                Add <%= user.username %>'s Location
+                <hr>
+                <form action="/ppUpdate" method="post">
+                    <div class="form-group">
+                        <input type="text" name="location" class="form-control" readonly/>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function addimage() {
-        console.log("About damn time!");
-        var input = document.createElement('input');
-        input.type = 'file';
-        input.onchange = e => {
-            // getting a hold of the file reference
-            var file = e.target.files[0];
-            // setting up the reader
-            var reader = new FileReader();
-            reader.readAsDataURL(file); // this is reading as data url
-            // here we tell the reader what to do when it's done reading...
-            reader.onload = readerEvent => {
-                var content = readerEvent.target.result; // this is the content!
-                var current = $('#images').val();
-                $('#images').empty();
-                $('#images').val(current + "|" + content); //add base64 string to 
-            }
+    console.log('About Damn Time You UpLoaded An Image!');
+    function readFile() {
+        if (this.files && this.files[0]) {
+            var fr = new FileReader();
+            fr.addEventListener("load", function (e) {
+                document.getElementById("img").src = e.target.result;
+                document.getElementById("b64").value = e.target.result;
+            });
+            fr.readAsDataURL(this.files[0]);
         }
-        input.click();
     }
+    document.getElementById("inp").addEventListener("change", readFile);
 </script>

@@ -80,17 +80,17 @@ router.post('/ppUpdate', (req, res)=> {
   MongoClient.connect(datab,
     { useNewUrlParser: true, useUnifiedTopology: true },
     (err, db)=> {
-    const profile = req.body.profile;
+    const prof = req.body.profile;
     if(err) throw err;
     const dbObject = db.db("matchax");
     const query = { email: req.user.email };
-    const change = { $set: { profilePic: profile.split('|') } };
+    const change = { $set: { profilePic: prof } };
     dbObject.collection("users").updateOne(query, change, (err, res)=> {
       if(err) throw err;
       req.flash('success_msg', 'Image Uploaded!');
       db.close();
     });
-    res.redirect('/profile');
+    res.redirect('/update');
   });
 });
 
