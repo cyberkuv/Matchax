@@ -1,0 +1,27 @@
+<head>
+    <% include ./default/head %>
+</head>
+<% include ./partials/messages %>
+<div class="modal-dialog modal-login">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="avatar">
+                <img src="https://png.pngtree.com/svg/20170518/account_898722.png" alt="Avatar">
+            </div>
+            <h4 class="modal-title">Member Verification</h4>
+        </div>
+        <div class="modal-body">
+            <form action="/verify" method="post">
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="email" required />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Verify</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="/signi">Already Verified ? Sign in</a>
+        </div>
+    </div>
+</div>

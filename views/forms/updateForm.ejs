@@ -1,0 +1,83 @@
+<div class="container profile">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                Update @<%= user.firstname %>'s Information
+                <hr>
+                <form action="/update" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="firstname" placeholder="Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="lastname" placeholder="Surname" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="Username" />
+                    </div>
+                    <div class="form-group">
+                        <select name="preference" class="form-control" id="exampleFormControlSelect1">
+                            <option>Sexual Preference</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="hobby" placeholder="Hobby">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="interest" placeholder="Interest">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="language" placeholder="Main Language">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="nationality" placeholder="nationality">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="countryOfResidence"
+                            placeholder="Country Of Residence">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-danger">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                Upload Profile Picture @<%= user.firstname %>
+                <hr>
+                <button onclick="addimage()" type="" class="btn btn-success">Add</button>
+                <form action="/ppUpdate" method="post">
+                    <div class="form-group">
+                        <br>
+                        <input id="images" class="form-control" name="profile" type="text" readonly />
+                    </div>
+                    <button type="submit" class="btn btn-danger">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function addimage() {
+        console.log("About damn time!");
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.onchange = e => {
+            // getting a hold of the file reference
+            var file = e.target.files[0];
+            // setting up the reader
+            var reader = new FileReader();
+            reader.readAsDataURL(file); // this is reading as data url
+            // here we tell the reader what to do when it's done reading...
+            reader.onload = readerEvent => {
+                var content = readerEvent.target.result; // this is the content!
+                var current = $('#images').val();
+                $('#images').empty();
+                $('#images').val(current + "|" + content); //add base64 string to 
+            }
+        }
+        input.click();
+    }
+</script>

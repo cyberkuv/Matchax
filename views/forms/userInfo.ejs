@@ -1,0 +1,53 @@
+<div class="container profile">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12" style="font-size: 15px;">User Info
+                <hr>
+                <% if(user.profilePic) { %>
+                    <img style="border-radius: 2px;" src="<%= user.profilePic %>" alt="profile pic">
+                <% } else { %>
+                    <img style="border-radius: 8px;" src="./images/595865.jpg" alt="profile pic">
+                <% } %>
+                <hr>
+                <div class="col">Username : <%= user.username %></div>
+                <hr>
+                <div class="col">Name : <%= user.firstname %></div>
+                <div class="col">Surname :<%= user.lastname %></div>
+                <div class="col">Age : <%= user.age %></div>
+                <div class="col">Email : <%= user.email %></div>
+                <div class="col">Gender : <%= user.gender %></div>
+                <hr>
+                Preference
+                <div class="col"><%= user.preference %></div>
+                <hr>
+                Hobbies
+                <div class="col"><%= user.hobby %></div>
+                <hr>
+                Interest
+                <div class="col"><%= user.interest %></div>
+                <hr>
+                Languages
+                <div class="col"><%= user.language %></div>
+                <hr>
+                Nationality
+                <div class="col"><%= user.nationality %></div>
+                <hr>
+                Country Of Residence
+                <div class="col"><%= user.countryOfResidence %></div>
+                <hr>
+                Option
+                <hr>
+                <div class="col">
+                    <button type="button" class="btn btn-danger">
+                        <a href="/update">Update</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <%= user.username %>'s Matches
+            </div>
+        </div>
+    </div>
+</div>
