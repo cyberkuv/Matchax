@@ -8,6 +8,7 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.google.clientSecret,
     callbackURL: keys.google.callbackURL
 }, (accessToken, refreshToken, profile, cb) => {
+    console.log(profile);
     User.findOne({ googleId: profile.id }).then((currUser) => {
         if (currUser) {
             return cb(null, currUser, { message: 'User already exists!' });

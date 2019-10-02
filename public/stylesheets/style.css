@@ -1,6 +1,9 @@
 body {
   background-color: maroon !important;
 }
+hr {
+  background-color: maroon;
+}
 .navbar.navbar-expand-lg.navbar-light { 
   background-color: wheat;
   border-bottom: 2px solid white;
@@ -149,11 +152,10 @@ input.form-control.mr-sm-2 {
   position: absolute;
   top: 40%;
   left: 20%;
-  border: 2px solid white;
   background-color: wheat;
   border-top-left-radius: 1vmin;
   border-bottom-right-radius: 1vmin;
-  box-shadow: 6px 6px 8px white;
+  box-shadow: 5px 5px 10px white;
 }
 .index > img {
   width: 100%;
