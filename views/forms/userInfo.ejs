@@ -4,9 +4,9 @@
             <div class="col-md-12" style="font-size: 15px;">User Info
                 <hr>
                 <% if(user.profilePic) { %>
-                    <img style="border-radius: 10px;" src="<%= user.profilePic %>" alt="profile pic">
+                <img style="border-radius: 10px;" src="<%= user.profilePic %>" alt="profile pic">
                 <% } else { %>
-                    <img style="border-radius: 20px;" src="./images/595865.jpg" alt="profile pic">
+                <img style="border-radius: 20px;" src="./images/595865.jpg" alt="profile pic">
                 <% } %>
                 <hr>
                 <div class="col">Username : <%= user.username %></div>
@@ -35,19 +35,49 @@
                 Country Of Residence
                 <div class="col"><%= user.countryOfResidence %></div>
                 <hr>
-                Option
-                <hr>
-                <div class="col">
-                    <button type="button" class="btn btn-success">
-                        <a href="/update">Update</a>
-                    </button>
-                </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="col-md-12">
                 <%= user.username %>'s Matches
+                <hr>
             </div>
         </div>
+        <form action="/location">
+            <input type="text" class="form-control" name="longitude" id="longitude" hidden />
+            <input type="text" class="form-control" name="latitude" id="latitude" hidden />
+        </form>
     </div>
 </div>
+<script>
+    function currPosition(position) {
+        const lng = position.coords.longitude;
+        const lat = position.coords.latitude;
+        console.log(`Longitude: ${lng} | Latitude: ${lat}`);
+        document.getElementById("longitude").value = lng;
+        document.getElementById("latitude").value = lat;
+    }
+    function localNotRecieved(error) {
+        switch (error.code) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+        console.log(error);
+    }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(currPosition, localNotRecieved, {
+            maximumAge: 1500000, timeout: 5000
+        });
+        const watcher = navigator.geolocation.watchPosition(currPosition, localNotRecieved);
+        setTimeout(() => {
+            navigator.geolocation.clearWatch(watcher);
+        }, 15000);
+    }
+    else {
+        console.log('Geolocation not supported by browser');
+    }
+</script>

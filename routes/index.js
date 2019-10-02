@@ -55,15 +55,18 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
     (err, db)=> {
     let errors = [];
     const {
-      firstname, lastname, username,
+      firstname, lastname, username, age,
       preference, hobby, interest, language,
       nationality, countryOfResidence
     } = req.body;
     const email = req.user.email;
+    if(age < 18) {
+      errors.push({ msg: 'Must be 18 and above!' });
+    }
     if(err) throw err;
     const dbObject = db.db("matchax");
     const query = { email: email };
-    const change = { $set: { firstname: firstname, lastname: lastname, username: username,
+    const change = { $set: { firstname: firstname, lastname: lastname, username: username, age: age,
       preference: preference, hobby: hobby, interest: interest, language: language, nationality: nationality,
       countryOfResidence: countryOfResidence } };
     dbObject.collection("users").findOneAndUpdate(query, change, (err, res)=> {
@@ -93,6 +96,8 @@ router.post('/ppUpdate', (req, res)=> {
     res.redirect('/update');
   });
 });
+
+// Adding Users Longitude and Latutude to database
 
 // Delete
 router.delete('/delete', (req, res) => {

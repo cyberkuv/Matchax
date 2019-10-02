@@ -17,7 +17,9 @@ const usrSchema = new mongoose.Schema({
     language: { type: String },
     nationality: { type: String },
     countryOfResidence: { type: String },
-    createdDate: { type: Date, default: Date.now }
+    createdDate: { type: Date, default: Date.now },
+    longitude: { type: Number },
+    latitude: { type: Number }
 });
 
 usrSchema.set('toJSON', { virtuals: true });
