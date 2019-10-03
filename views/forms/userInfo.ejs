@@ -20,20 +20,22 @@
                 Preference
                 <div class="col"><%= user.preference %></div>
                 <hr>
-                Hobbies
+                Hobby
                 <div class="col"><%= user.hobby %></div>
                 <hr>
                 Interest
                 <div class="col"><%= user.interest %></div>
                 <hr>
-                Languages
+                Language
                 <div class="col"><%= user.language %></div>
                 <hr>
                 Nationality
                 <div class="col"><%= user.nationality %></div>
                 <hr>
-                Country Of Residence
-                <div class="col"><%= user.countryOfResidence %></div>
+                Location
+                <div class="col">Country : <%= user.countryOfResidence %></div>
+                <div class="col">State : <%= user.state %></div>
+                <div class="col">City : <%= user.city %></div>
                 <hr>
             </div>
         </div>
@@ -43,41 +45,9 @@
                 <hr>
             </div>
         </div>
-        <form action="/location">
+        <!-- <form action="/location">
             <input type="text" class="form-control" name="longitude" id="longitude" hidden />
             <input type="text" class="form-control" name="latitude" id="latitude" hidden />
-        </form>
+        </form> -->
     </div>
 </div>
-<script>
-    function currPosition(position) {
-        const lng = position.coords.longitude;
-        const lat = position.coords.latitude;
-        console.log(`Longitude: ${lng} | Latitude: ${lat}`);
-        document.getElementById("longitude").value = lng;
-        document.getElementById("latitude").value = lat;
-    }
-    function localNotRecieved(error) {
-        switch (error.code) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-        }
-        console.log(error);
-    }
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(currPosition, localNotRecieved, {
-            maximumAge: 1500000, timeout: 5000
-        });
-        const watcher = navigator.geolocation.watchPosition(currPosition, localNotRecieved);
-        setTimeout(() => {
-            navigator.geolocation.clearWatch(watcher);
-        }, 15000);
-    }
-    else {
-        console.log('Geolocation not supported by browser');
-    }
-</script>

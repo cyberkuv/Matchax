@@ -2,3 +2,4 @@ node_modules
 package-lock.json
 bin
 config/keys.js
+config/database.js

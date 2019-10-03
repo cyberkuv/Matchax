@@ -18,6 +18,8 @@ const usrSchema = new mongoose.Schema({
     nationality: { type: String },
     countryOfResidence: { type: String },
     createdDate: { type: Date, default: Date.now },
+    state: { type: String },
+    city: { type: String },
     longitude: { type: Number },
     latitude: { type: Number }
 });

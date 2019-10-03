@@ -9,6 +9,9 @@ hr {
   border-bottom: 2px solid white;
   padding: 0px 0px !important;
 }
+.navbar.navbar-expand-lg.navbar-light > img{
+  width: 10%; 
+}
 .navbar-brand {
   margin: 5px 10px 5px 10px !important;
   /* padding: 5px 5px !important; */
