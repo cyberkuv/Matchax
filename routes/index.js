@@ -98,6 +98,27 @@ router.post('/ppUpdate', (req, res)=> {
 });
 
 // Adding Users Longitude and Latutude to database
+router.post('/location', (req, res)=> {
+  MongoClient.connect(datab,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    (err, db)=> {
+    let errors = [];
+    const { country, state, city, longitude, latitude } = req.body;
+    if(!country || !state || !city || !longitude || !latitude) {
+      errors.push({ msg: 'Fields Cannot Be Empty!' });
+    }
+    if(err) throw err;
+    const dbObject = db.db("matchax");
+    const query = { email: req.user.email };
+    const change = { $set: { countryOfResidence: country, state: state, city: city, longitude: longitude, latitude: latitude } };
+    dbObject.collection("users").updateOne(query, change, (err, res)=> {
+      if(err) throw err;
+      req.flash('success_msg', 'User Location Saved!');
+      db.close();
+    });
+    res.redirect('/update');
+  });
+});
 
 // Delete
 router.delete('/delete', (req, res) => {
