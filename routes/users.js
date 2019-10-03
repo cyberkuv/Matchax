@@ -8,6 +8,9 @@ const sgMail = require('@sendgrid/mail');
 const keys = require('../config/keys');
 sgMail.setApiKey(keys.sendGrid.apiKey);
 
+const MongoClient = require('mongodb').MongoClient;
+const datab = require('../config/database').mongoURI;
+
 // Login Page
 router.get('/signi',
   forwardAuthenticated,

@@ -191,7 +191,7 @@ input.form-control.mr-sm-2 {
   border-radius: 2px;
   border: 2px solid white;
   font-weight: bold;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .col-md-12 > img {

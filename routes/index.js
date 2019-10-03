@@ -97,6 +97,23 @@ router.post('/ppUpdate', (req, res)=> {
   });
 });
 
+// Delete Profile Pic
+router.post('/delPic', (req, res)=> {
+  MongoClient.connect(datab,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    (err, db)=> {
+    if(err) throw err;
+    const dbObject = db.db("matchax");
+    const query = { email: req.user.email };
+    const change = { $set: { profilePic: '' } };
+    dbObject.collection("users").updateOne(query, change, (err, res)=> {
+      if(err) throw err;
+      db.close();
+    });
+    res.redirect('/update');
+  });
+});
+
 // Adding Users Longitude and Latutude to database
 router.post('/location', (req, res)=> {
   MongoClient.connect(datab,

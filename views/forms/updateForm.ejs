@@ -6,16 +6,20 @@
                 <hr>
                 <form action="/update" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="firstname" value="<%= user.firstname %>" />
+                        <input type="text" class="form-control" name="firstname" value="<%= user.firstname %>"
+                            placeholder="Firstname" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="lastname" value="<%= user.lastname %>" />
+                        <input type="text" class="form-control" name="lastname" value="<%= user.lastname %>"
+                            placeholder="Lastname" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="username" value="<%= user.username %>" />
+                        <input type="text" class="form-control" name="username" value="<%= user.username %>"
+                            placeholder="Username" />
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" name="age" value="<%= user.age %>" />
+                        <input type="number" class="form-control" name="age" value="<%= user.age %>"
+                            placeholder="Age" />
                     </div>
                     <div class="form-group">
                         <select name="preference" class="form-control" id="exampleFormControlSelect1">
@@ -25,20 +29,24 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="hobby" value="<%= user.hobby %>">
+                        <input type="text" class="form-control" name="hobby" value="<%= user.hobby %>"
+                            placeholder="Hobby">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="interest" value="<%= user.interest %>">
+                        <input type="text" class="form-control" name="interest" value="<%= user.interest %>"
+                            placeholder="Interest">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="language" value="<%= user.language %>">
+                        <input type="text" class="form-control" name="language" value="<%= user.language %>"
+                            placeholder="Language">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nationality" value="<%= user.nationality %>">
+                        <input type="text" class="form-control" name="nationality" value="<%= user.nationality %>"
+                            placeholder="Nationality">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="countryOfResidence"
-                            value="<%= user.countryOfResidence %>">
+                            value="<%= user.countryOfResidence %>" placeholder="Country Of Residence">
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-success">Update</button>
@@ -60,6 +68,9 @@
                     </div>
                     <button type="submit" class="btn btn-success">Upload</button>
                 </form>
+                <form action="/delPic" method="post">
+                    <button type="submit" class="btn btn-success">Delete Profile Pic</button>
+                </form>
             </div>
             <br>
             <div class="col-md-12">
@@ -75,8 +86,8 @@
                         <br>
                         <input onclick="googleLocation()" type="text" class="form-control" name="city" id="city"
                             placeholder="Click To get Location" value="<%= user.city %>" readonly />
-                        <input onclick="googleLocation()" type="text" class="form-control" name="longitude" id="longitude"
-                            placeholder="Click To get Location" value="<%= user.longitude %>" hidden />
+                        <input onclick="googleLocation()" type="text" class="form-control" name="longitude"
+                            id="longitude" placeholder="Click To get Location" value="<%= user.longitude %>" hidden />
                         <input onclick="googleLocation()" type="text" class="form-control" name="latitude" id="latitude"
                             placeholder="Click To get Location" value="<%= user.latitude %>" hidden />
                         <hr>
@@ -104,7 +115,7 @@
     // Getting User Location Without Permission
     function googleLocation() {
         $.getJSON('https://geoip-db.com/json/')
-            .done(function(location) {
+            .done(function (location) {
                 console.log(location);
                 $('#country').val(location.country_name);
                 $('#state').val(location.state);
