@@ -19,6 +19,7 @@ const usrSchema = new mongoose.Schema({
     },
     hobby: { type: String },
     interest: { type: String },
+    bio: { type: String },
     language: { type: String },
     nationality: { type: String },
     countryOfResidence: { type: String },

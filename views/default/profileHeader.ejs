@@ -21,11 +21,13 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <% if(user.active == true) { %>
-                <a class="nav-link" style="color: black !important;" href="#">Active: 
-                    <span style="color: green;"><%= user.active %></span></a>
+                <a class="nav-link" href="#">
+                    <span style="color: green;">&bull;Online</span>
+                </a>
             <% } else { %>
-                <a class="nav-link" style="color: black !important;" href="#">Active: 
-                    <span style="color: maroon;"><%= user.active %></span></a>
+                <a class="nav-link" href="#">
+                    <span style="color: maroon;">&bull;Offline</span>
+                </a>
             <% } %>
             <a class="nav-link" href="/logout"> Logout </a>
         </form>

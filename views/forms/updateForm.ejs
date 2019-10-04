@@ -29,12 +29,45 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <input type="text" name="prefAge" id="prefAge">
+                        <input type="number" name="min" id="min" hidden>
+                        <input type="number" name="max" id="max" hidden>
+                        <script type="text/javascript">
+                            var $pref = $("#prefAge");
+                            $pref.ionRangeSlider({
+                                type: "double",
+                                grid: true,
+                                min: 18,
+                                max: 60,
+                                from: '<%= user.prefAge.min %>',
+                                to: '<%= user.prefAge.max %>',
+                                prefix: 'Age: ',
+                            });
+                            $pref.on("change", function () {
+                                var $inp = $(this);
+                                var from = $inp.prop("value"); // reading input value
+                                var from2 = $inp.data("from"); // reading input data-from attribute
+
+                                var prefAge = document.getElementById("prefAge").value;
+                                prefAge = prefAge.split(";");
+                                document.getElementById("min").value = from2;
+                                document.getElementById("max").value = prefAge[1];
+
+                                console.log(from, from2); // FROM value
+                            });
+                        </script>
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="form-control" name="hobby" value="<%= user.hobby %>"
                             placeholder="Hobby">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="interest" value="<%= user.interest %>"
-                            placeholder="Interest">
+                        <select name="interest" class="form-control" id="exampleFormControlSelect1">
+                            <option><%= user.interest %></option>
+                            <option>#vegan</option>
+                            <option>#geek</option>
+                            <option>#piercing</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="language" value="<%= user.language %>"
@@ -47,6 +80,11 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="countryOfResidence"
                             value="<%= user.countryOfResidence %>" placeholder="Country Of Residence">
+                    </div>
+                    <div class="form-group purple-border">
+                        <label for="exampleFormControlTextarea4">Bio</label>
+                        <textarea class="form-control" name="bio" id="exampleFormControlTextarea4"
+                            placeholder="<%= user.bio%>" rows="3"></textarea>
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-success">Update</button>

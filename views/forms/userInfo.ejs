@@ -9,8 +9,10 @@
                 <img style="border-radius: 20px;" src="./images/595865.jpg" alt="profile pic">
                 <% } %>
                 <hr>
-                <div class="col"><span>&bull;</span> Username : <%= user.username %></div>
+                Bio
+                <div class="col"><span>&bull;</span> <%= user.bio %></div>
                 <hr>
+                <div class="col"><span>&bull;</span> Username : <%= user.username %></div>
                 <div class="col"><span>&bull;</span> Name : <%= user.firstname %></div>
                 <div class="col"><span>&bull;</span> Surname :<%= user.lastname %></div>
                 <div class="col"><span>&bull;</span> Age : <%= user.age %></div>
@@ -19,6 +21,22 @@
                 <hr>
                 Preference
                 <div class="col"><span>&bull;</span><%= user.preference %></div>
+                <div class="form-group">
+                    <input type="text" name="prefAge" id="prefAge">
+                    <script type="text/javascript">
+                        var $pref = $("#prefAge");
+                        $pref.ionRangeSlider({
+                            type: "double",
+                            min: 18,
+                            max: 60,
+                            from: '<%= user.prefAge.min %>',
+                            to: '<%= user.prefAge.max %>',
+                            prefix: 'Ages: ',
+                            from_fixed: true,
+                            to_fixed: true
+                        });
+                    </script>
+                </div>
                 <hr>
                 Hobby
                 <div class="col"><span>&bull;</span> <%= user.hobby %></div>
@@ -41,13 +59,10 @@
         </div>
         <div class="col-md-6">
             <div class="col-md-12">
-                <%= user.username %>'s Matches
+                Other Users
                 <hr>
+                <div class="col-md-12" id="otherUsers" style="background-color: maroon !important;"></div>
             </div>
         </div>
-        <!-- <form action="/location">
-            <input type="text" class="form-control" name="longitude" id="longitude" hidden />
-            <input type="text" class="form-control" name="latitude" id="latitude" hidden />
-        </form> -->
     </div>
 </div>

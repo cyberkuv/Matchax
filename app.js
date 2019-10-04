@@ -44,7 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Cookie Session
 app.use(cookie_session({
   maxAge: 24 * 60 * 60 * 1000,
-  keys: [keys.session.cookieKey]
+  keys: [keys.session.cookieKey],
+  sameSite: "None"
 }))
 
 // Passport middleware
