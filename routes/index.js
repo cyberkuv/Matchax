@@ -56,8 +56,8 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
     let errors = [];
     const {
       firstname, lastname, username, age,
-      preference, min, max, hobby, interest, language,
-      nationality, countryOfResidence, bio
+      preference, min, max, hobby, first, second, third, fourth, fifth,
+      interest, language, nationality, countryOfResidence, bio
     } = req.body;
     const email = req.user.email;
     if(age < 18) {
@@ -67,7 +67,8 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
     const dbObject = db.db("matchax");
     const query = { email: email };
     const change = { $set: { firstname: firstname, lastname: lastname, username: username, age: age,
-      preference: preference, prefAge: { min: min, max: max }, hobby: hobby, interest: interest,
+      preference: preference, prefAge: { min: min, max: max }, hobby: hobby,
+      interest: { first: first, second: second, third: third, fourth: fourth, fifth: fifth },
       language: language, nationality: nationality, countryOfResidence: countryOfResidence, bio: bio } };
     dbObject.collection("users").findOneAndUpdate(query, change, (err, res)=> {
       if(err) throw err;

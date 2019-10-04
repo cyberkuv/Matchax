@@ -30,8 +30,8 @@
                     </div>
                     <div class="form-group">
                         <input type="text" name="prefAge" id="prefAge">
-                        <input type="number" name="min" id="min" hidden>
-                        <input type="number" name="max" id="max" hidden>
+                        <input type="number" name="min" value="<%= user.prefAge.min %>" id="min" hidden>
+                        <input type="number" name="max" value="<%= user.prefAge.max %>" id="max" hidden>
                         <script type="text/javascript">
                             var $pref = $("#prefAge");
                             $pref.ionRangeSlider({
@@ -62,13 +62,42 @@
                             placeholder="Hobby">
                     </div>
                     <div class="form-group">
-                        <select name="interest" class="form-control" id="exampleFormControlSelect1">
-                            <option><%= user.interest %></option>
-                            <option>#vegan</option>
-                            <option>#geek</option>
-                            <option>#piercing</option>
+                        <select id="interest" name="interest" class="form-control" id="exampleFormControlSelect1"
+                            multiple>
+                            <% include ./options %>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <input id="first" type="text" class="form-control" name="first" value="<%= user.interest.first %>"
+                            placeholder="Choice1" hidden>
+                        <input id="second" type="text" class="form-control" name="second" value="<%= user.interest.second %>"
+                            placeholder="Choice2" hidden>
+                        <input id="third" type="text" class="form-control" name="third" value="<%= user.interest.third %>"
+                            placeholder="Choice3" hidden>
+                        <input id="fourth" type="text" class="form-control" name="fourth" value="<%= user.interest.fourth %>"
+                            placeholder="Choice4" hidden>
+                        <input id="fifth" type="text" class="form-control" name="fifth" value="<%= user.interest.fifth %>"
+                            placeholder="Choice5" hidden>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            var last_selec = null;
+                            $("#interest").change(function () {
+                                if ($(this).val().length > 5) {
+                                    $(this).val(last_selec);
+                                }
+                                else {
+                                    last_selec = $(this).val();
+                                    console.log(last_selec);
+                                    document.getElementById("first").value = last_selec[0];
+                                    document.getElementById("second").value = last_selec[1];
+                                    document.getElementById("third").value = last_selec[2];
+                                    document.getElementById("fourth").value = last_selec[3];
+                                    document.getElementById("fifth").value = last_selec[4];
+                                }
+                            });
+                        });
+                    </script>
                     <div class="form-group">
                         <input type="text" class="form-control" name="language" value="<%= user.language %>"
                             placeholder="Language">
@@ -84,7 +113,7 @@
                     <div class="form-group purple-border">
                         <label for="exampleFormControlTextarea4">Bio</label>
                         <textarea class="form-control" name="bio" id="exampleFormControlTextarea4"
-                            placeholder="<%= user.bio%>" rows="3"></textarea>
+                            rows="3"><%= user.bio %></textarea>
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-success">Update</button>

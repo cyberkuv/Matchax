@@ -24,15 +24,15 @@ router.post('/signu',
     const {
       firstname, lastname, gender, age, username,
       email, password, rpassword, verified, preference,
-      hobby, interest, language, nationality,
-      countryOfResidence
+      hobby, first, second, third, fourth, fifth,
+      language, nationality, countryOfResidence
     } = req.body;
     let errors = [];
 
     if (!firstname || !lastname || !gender || !age ||
       !preference || !hobby || !interest || !language ||
-      !nationality || !countryOfResidence ||
-      !username || !email || !password || !rpassword) {
+      !nationality || !countryOfResidence || !first || !second || !third ||
+      !fourth || !fifth || !username || !email || !password || !rpassword) {
       errors.push({ msg: 'Fields cannot be empty!' });
     }
 
@@ -52,8 +52,8 @@ router.post('/signu',
       res.render('signu', {
         errors, firstname, lastname, gender, age,
         username, email, password, rpassword, preference,
-        hobby, interest, language, nationality,
-        countryOfResidence
+        hobby, first, second, third, fourth, fifth,
+        language, nationality, countryOfResidence
       });
     } else {
       User.findOne({ email: email }).then(user => {
@@ -67,7 +67,7 @@ router.post('/signu',
           const newUser = new User({
             firstname, lastname, gender, age, username,
             email, password, verified, preference,
-            hobby, interest, language, nationality,
+            hobby, first, second, third, fourth, fifth, language, nationality,
             countryOfResidence
           });
 

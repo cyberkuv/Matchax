@@ -254,3 +254,21 @@ input.form-control.mr-sm-2 {
   text-decoration: none !important;
   color: wheat;
 }
+
+.mid {
+  width: 100%;
+  text-align: center;
+}
+.velkom {
+  width: 20%;
+  margin: auto;
+  padding: 10px;
+  background-color: wheat;
+  color: maroon;
+  font-weight: bolder;
+  border-radius: 5px;
+}
+
+/* Notification Styling begin */
+
+/* Notification Styling end */
