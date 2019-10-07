@@ -11,13 +11,16 @@ router.get('/', forwardAuthenticated,
   (req, res) => res.render('index', { title: 'Matchax' }));
 
 // Dashboard
-router.get('/profile', ensureAuthenticated,
-  (req, res) =>
-    res.render('profile', {
-      user: req.user,
-      title: 'Matchax'
-    })
-);
+router.get('/profile', (req, res)=> {
+  MongoClient.connect(datab, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db)=> {
+    const dbo = db.db("matchax");
+    dbo.collection("users").find({}).toArray(function (err, data) {
+      if(err) throw err;
+      res.render('profile', { user: req.user, title: 'MatchYa', obj: data });
+      db.close();
+    });
+  });
+})
 
 // Verification { Get Verification Page }
 router.get('/verify',
@@ -40,7 +43,7 @@ router.post('/verify', (req, res)=> {
       req.flash('success_msg', 'Account Successfully Verified!');
       db.close();
     });
-    res.redirect('/signi');
+    res.redirect('/');
   });
 });
 
@@ -57,7 +60,7 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
     const {
       firstname, lastname, username, age,
       preference, min, max, hobby, first, second, third, fourth, fifth,
-      interest, language, nationality, countryOfResidence, bio
+      ethnicity, language, nationality, countryOfResidence, bio
     } = req.body;
     const email = req.user.email;
     if(age < 18) {
@@ -68,7 +71,7 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
     const query = { email: email };
     const change = { $set: { firstname: firstname, lastname: lastname, username: username, age: age,
       preference: preference, prefAge: { min: min, max: max }, hobby: hobby,
-      interest: { first: first, second: second, third: third, fourth: fourth, fifth: fifth },
+      interest: { first: first, second: second, third: third, fourth: fourth, fifth: fifth }, ethnicity: ethnicity,
       language: language, nationality: nationality, countryOfResidence: countryOfResidence, bio: bio } };
     dbObject.collection("users").findOneAndUpdate(query, change, (err, res)=> {
       if(err) throw err;

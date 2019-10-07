@@ -1,7 +1,10 @@
 <div class="container profile">
     <div class="row">
         <div class="col-md-6">
-            <div class="col-md-12" style="font-size: 15px;"><%= user.username %>'s Information:
+            <div class="col-md-12" style="font-size: 15px;">
+                <div class="btn btn-success">
+                    <i class="fas fa-home"></i> <%= user.firstname %>!
+                </div>
                 <hr>
                 <% if(user.profilePic) { %>
                 <img style="border-radius: 10px;" src="<%= user.profilePic %>" alt="profile pic">
@@ -44,29 +47,29 @@
                 <hr>
                 Interest:
                 <% if(user.interest.first == "undefined") { %>
-                    <div class="col"><span>&bull;</span> ---------.</div>
+                <div class="col"><span>&bull;</span> ---------.</div>
                 <% } else { %>
-                    <div class="col"><span>&bull;</span> <%= user.interest.first %>.</div>
+                <div class="col"><span>&bull;</span> <%= user.interest.first %>.</div>
                 <% } %>
                 <% if(user.interest.second == "undefined") { %>
-                    <div class="col"><span>&bull;</span> ---------.</div>
+                <div class="col"><span>&bull;</span> ---------.</div>
                 <% } else { %>
-                    <div class="col"><span>&bull;</span> <%= user.interest.second %>.</div>
+                <div class="col"><span>&bull;</span> <%= user.interest.second %>.</div>
                 <% } %>
                 <% if(user.interest.third == "undefined") { %>
-                    <div class="col"><span>&bull;</span> ---------.</div>
+                <div class="col"><span>&bull;</span> ---------.</div>
                 <% } else { %>
-                    <div class="col"><span>&bull;</span> <%= user.interest.third %>.</div>
+                <div class="col"><span>&bull;</span> <%= user.interest.third %>.</div>
                 <% } %>
                 <% if(user.interest.fourth == "undefined") { %>
-                    <div class="col"><span>&bull;</span> ---------.</div>
+                <div class="col"><span>&bull;</span> ---------.</div>
                 <% } else { %>
-                    <div class="col"><span>&bull;</span> <%= user.interest.fourth %>.</div>
+                <div class="col"><span>&bull;</span> <%= user.interest.fourth %>.</div>
                 <% } %>
                 <% if(user.interest.fifth == "undefined") { %>
-                    <div class="col"><span>&bull;</span> ---------.</div>
+                <div class="col"><span>&bull;</span> ---------.</div>
                 <% } else { %>
-                    <div class="col"><span>&bull;</span> <%= user.interest.fifth %>.</div>
+                <div class="col"><span>&bull;</span> <%= user.interest.fifth %>.</div>
                 <% } %>
                 <hr>
                 Language:
@@ -74,6 +77,8 @@
                 <hr>
                 Nationality:
                 <div class="col"><span>&bull;</span> <%= user.nationality %></div>
+                Ethnicity:
+                <div class="col"><span>&bull;</span> <%= user.ethnicity %></div>
                 <hr>
                 Location:
                 <div class="col"><span>&bull;</span> Country : <%= user.countryOfResidence %></div>
@@ -83,11 +88,52 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="col-md-12">
-                Other Users:
+            <div class="col-md-12 height">
+                    <div class="btn btn-success">
+                        Other <i class="fas fa-users"></i> Users
+                    </div>
                 <hr>
-                <div class="col-md-12" id="otherUsers" style="background-color: maroon !important;"></div>
+                <div class="col" style="overflow: hidden !important;">
+                    <% for(var i = 0; i < obj.length; i++) { %>
+                    <div class="col-md-12" style="background-color: #011936;">
+                        <% if(obj[i].email == user.email) { %>
+                            Your Info Is To The Left <<
+                        <% } else { %>
+                        <% if(obj[i].profilePic) { %>
+                        <img src="<%= obj[i].profilePic %>" style="width: 40%;" alt="profile pic">
+                        <% } else { %>
+                        <img src="./images/595865.jpg" style="width: 40%;" alt="profile pic">
+                        <% } %>
+                        <div class="row">
+                            <div class="col"><span>&bull;</span> Username: <%= obj[i].username %></div>
+                            <div class="col"><span>&bull;</span> Firstname: <%= obj[i].firstname %></div>
+                            <div class="w-100"></div>
+                            <div class="col"><span>&bull;</span> Lastname: <%= obj[i].lastname %></div>
+                            <div class="col"><span>&bull;</span> Age: <%= obj[i].age %></div>
+                            <div class="w-100"></div>
+                            <div class="col"><span>&bull;</span> Gender: <%= obj[i].gender %></div>
+                            <div class="col"><span>&bull;</span> Nationality: <%= obj[i].nationality %></div>
+                            <div class="w-100"></div>
+                            <div class="col"><span>&bull;</span> Language: <%= obj[i].language %></div>
+                            <div class="col"><span>&bull;</span> Ethnicity: <%= obj[i].ethnicity %></div>
+                            <div class="w-100"></div>
+                            <div class="col"><span>&bull;</span> Nationality: <%= obj[i].nationality %></div>
+                            <div class="w-100"></div>
+                            <div class="col"><span>&bull;</span> Country Of Residence: <%= obj[i].countryOfResidence %>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col"><span>&bull;</span> Bio: <%= obj[i].bio %></div>
+                            <div class="w-100"></div>
+                            <div class="col"><button class="btn btn-success"><i class="far fa-thumbs-up"></i> like</button></div>
+                            <div class="col"><button class="btn btn-success"><i class="fas fa-eye"></i> view</button></div>
+                        </div>
+                    </div>
+                    <br>
+                    <% } %>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

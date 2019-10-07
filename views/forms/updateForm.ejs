@@ -41,7 +41,7 @@
                                 max: 60,
                                 from: '<%= user.prefAge.min %>',
                                 to: '<%= user.prefAge.max %>',
-                                prefix: 'Age: ',
+                                prefix: 'Ages: '
                             });
                             $pref.on("change", function () {
                                 var $inp = $(this);
@@ -105,6 +105,15 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="nationality" value="<%= user.nationality %>"
                             placeholder="Nationality">
+                    </div>
+                    <div class="form-group">
+                        <select name="ethnicity" class="form-control" id="exampleFormControlSelect1">
+                            <option><%= user.ethnicity %></option>
+                            <option>Black</option>
+                            <option>White</option>
+                            <option>Colored</option>
+                            <option>Other</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="countryOfResidence"

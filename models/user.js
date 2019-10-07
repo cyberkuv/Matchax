@@ -28,6 +28,7 @@ const usrSchema = new mongoose.Schema({
     bio: { type: String },
     language: { type: String },
     nationality: { type: String },
+    ethnicity: { type: String },
     countryOfResidence: { type: String },
     createdDate: { type: Date, default: Date.now },
     state: { type: String },
