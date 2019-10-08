@@ -17,6 +17,7 @@ router.get('/profile', (req, res)=> {
     dbo.collection("users").find({}).toArray(function (err, data) {
       if(err) throw err;
       res.render('profile', { user: req.user, title: 'MatchYa', obj: data });
+      console.log(data);
       db.close();
     });
   });
@@ -159,10 +160,17 @@ router.delete('/delete', (req, res) => {
 });
 
 // Matches
-router.get('/matches', ensureAuthenticated,
-  (req, res) => {
-    res.render('match', { user: req.user });
+router.get('/matches', ensureAuthenticated, (req, res)=> {
+  MongoClient.connect(datab, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db)=> {
+    const dbo = db.db("matchax");
+    dbo.collection("users").find({ firstname : { $eq: "Lisa" } }).toArray(function (err, match) {
+      if(err) throw err;
+      res.render('match', { user: req.user, title: 'MatchYa', match: match });
+      console.log(match);
+      db.close();
+    });
   });
+});
 
 // Forget password
 router.get('/forgot', (req, res) => {
