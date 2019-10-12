@@ -11,13 +11,12 @@ router.get('/', forwardAuthenticated,
   (req, res) => res.render('index', { title: 'Matchax' }));
 
 // Dashboard
-router.get('/profile', (req, res)=> {
+router.get('/profile', ensureAuthenticated, (req, res)=> {
   MongoClient.connect(datab, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db)=> {
     const dbo = db.db("matchax");
     dbo.collection("users").find({}).toArray(function (err, data) {
       if(err) throw err;
       res.render('profile', { user: req.user, title: 'MatchYa', obj: data });
-      console.log(data);
       db.close();
     });
   });
@@ -163,10 +162,13 @@ router.delete('/delete', (req, res) => {
 router.get('/matches', ensureAuthenticated, (req, res)=> {
   MongoClient.connect(datab, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db)=> {
     const dbo = db.db("matchax");
-    dbo.collection("users").find({ firstname : { $eq: "Lisa" } }).toArray(function (err, match) {
+    dbo.collection("users").find({}).toArray(function (err, matches) {
       if(err) throw err;
-      res.render('match', { user: req.user, title: 'MatchYa', match: match });
+      var match = matches.filter(function(val) {
+        return val;
+      });
       console.log(match);
+      res.render('match', { user: req.user, title: 'MatchYa', matches: match });
       db.close();
     });
   });

@@ -1,0 +1,38 @@
+<div class="container profile">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12" style="font-size: 15px;"> 
+                <div class="btn btn-success">
+                    <i class="fas fa-users"></i> Matches!
+                </div>
+                <hr>
+                <% if(matches) { %>
+                    <% for(var x = 0; x < matches.length; x++) { %>
+                        <% if(matches[x].email == user.email) { %>
+                        <% } else { %>
+                            <% if(matches[x].gender != user.gender) { %>
+                                <% if(matches[x].age >= user.prefAge.min && matches[x].age <= user.prefAge.max) { %>
+                                    <div class="col-md-12" style="background-color: #011936;">
+                                        <div class="col">Opposite Genders Located: <%= matches[x].gender %></div>
+                                        <div class="col"><span>&bull;</span> Username: <%= matches[x].username %></div>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                <% } else { %>
+                    <div class="col">Matches Not Defined!</div>
+                <% } %>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="btn btn-success">
+                    <i class="fas fa-comments"></i> Chats!
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
