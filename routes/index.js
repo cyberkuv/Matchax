@@ -59,7 +59,7 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
     let errors = [];
     const {
       firstname, lastname, username, age,
-      preference, min, max, hobby, first, second, third, fourth, fifth,
+      min, max, hobby, first, second, third, fourth, fifth,
       ethnicity, language, nationality, countryOfResidence, bio
     } = req.body;
     const email = req.user.email;
@@ -70,7 +70,7 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
     const dbObject = db.db("matchax");
     const query = { email: email };
     const change = { $set: { firstname: firstname, lastname: lastname, username: username, age: age,
-      preference: preference, prefAge: { min: min, max: max }, hobby: hobby,
+      prefAge: { min: min, max: max }, hobby: hobby,
       interest: { first: first, second: second, third: third, fourth: fourth, fifth: fifth }, ethnicity: ethnicity,
       language: language, nationality: nationality, countryOfResidence: countryOfResidence, bio: bio } };
     dbObject.collection("users").findOneAndUpdate(query, change, (err, res)=> {
@@ -167,7 +167,6 @@ router.get('/matches', ensureAuthenticated, (req, res)=> {
       var match = matches.filter(function(val) {
         return val;
       });
-      console.log(match);
       res.render('match', { user: req.user, title: 'MatchYa', matches: match });
       db.close();
     });

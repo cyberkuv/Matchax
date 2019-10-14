@@ -23,13 +23,13 @@ router.post('/signu',
   (req, res) => {
     const {
       firstname, lastname, gender, age, username,
-      email, password, rpassword, verified, preference,
+      email, password, rpassword, verified,
       hobby, language, nationality, ethnicity, countryOfResidence
     } = req.body;
     let errors = [];
 
-    if (!firstname || !lastname || !gender || !age ||
-      !preference || !hobby || !language || !ethnicity ||
+    if (!firstname || !lastname || !gender || !age
+      || !hobby || !language || !ethnicity ||
       !nationality || !countryOfResidence || !username ||
       !email || !password || !rpassword) {
       errors.push({ msg: 'Fields cannot be empty!' });
@@ -64,7 +64,7 @@ router.post('/signu',
         } else {
           const newUser = new User({
             firstname, lastname, gender, age, username,
-            email, password, verified, preference, hobby,
+            email, password, verified, hobby,
             language, nationality, ethnicity , countryOfResidence
           });
 

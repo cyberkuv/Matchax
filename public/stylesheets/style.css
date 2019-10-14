@@ -244,16 +244,14 @@ input.form-control.mr-sm-2 {
   box-shadow: 0px 8px 16px 0px #82A3A1;
 }
 .col-md-12.height {
-  background-color: #465362;
-  color: white;
-  border-radius: 2px;
-  border: 2px solid #82A3A1;
-  font-weight: bold;
-  border-radius: 10px;
-  padding: 10px 10px 10px 10px;
-  box-shadow: 0px 8px 16px 0px #82A3A1;
-  height: 70vmax;
+  height: 80vmax;
   overflow: auto;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  /* width: 0px;
+  background: transparent; */
+  display: none;
 }
 
 .col-md-12 > img {

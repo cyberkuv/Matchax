@@ -22,13 +22,6 @@
                             placeholder="Age" />
                     </div>
                     <div class="form-group">
-                        <select name="preference" class="form-control" id="exampleFormControlSelect1">
-                            <option><%= user.preference %></option>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <input type="text" name="prefAge" id="prefAge">
                         <input type="number" name="min" value="<%= user.prefAge.min %>" id="min" hidden>
                         <input type="number" name="max" value="<%= user.prefAge.max %>" id="max" hidden>
