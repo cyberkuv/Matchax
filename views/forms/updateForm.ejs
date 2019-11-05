@@ -1,90 +1,157 @@
-<div class="container profile">
+<div class="container">
+    <h1><i class="fas fa-edit"></i> Update <%= user.firstname %>'s Information</h1>
+    <hr>
     <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12">
-                Update @<%= user.firstname %>'s Information
-                <hr>
-                <form action="/update" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="firstname" value="<%= user.firstname %>" />
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="lastname" value="<%= user.lastname %>" />
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="username" value="<%= user.username %>" />
-                    </div>
-                    <div class="form-group">
-                        <input type="number" class="form-control" name="age" value="<%= user.age %>" />
-                    </div>
-                    <div class="form-group">
-                        <select name="preference" class="form-control" id="exampleFormControlSelect1">
-                            <option><%= user.preference %></option>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="hobby" value="<%= user.hobby %>">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="interest" value="<%= user.interest %>">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="language" value="<%= user.language %>">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="nationality" value="<%= user.nationality %>">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="countryOfResidence"
-                            value="<%= user.countryOfResidence %>">
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-success">Update</button>
-                    </div>
-                </form>
-            </div>
+        <div class="col-sm-6">
+            <form action="/update" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="firstname" value="<%= user.firstname %>"
+                        placeholder="Firstname" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="lastname" value="<%= user.lastname %>"
+                        placeholder="Lastname" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" value="<%= user.username %>"
+                        placeholder="Username" />
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="age" value="<%= user.age %>" placeholder="Age" />
+                </div>
+                <div class="form-group">
+                    <input type="text" name="prefAge" id="prefAge">
+                    <input type="number" name="min" value="<%= user.prefAge.min %>" id="min" hidden>
+                    <input type="number" name="max" value="<%= user.prefAge.max %>" id="max" hidden>
+                    <script type="text/javascript">
+                        var $pref = $("#prefAge");
+                        $pref.ionRangeSlider({
+                            type: "double",
+                            grid: true,
+                            min: 18,
+                            max: 60,
+                            from: '<%= user.prefAge.min %>',
+                            to: '<%= user.prefAge.max %>',
+                            prefix: 'Ages: '
+                        });
+                        $pref.on("change", function () {
+                            var $inp = $(this);
+                            var from = $inp.prop("value"); // reading input value
+                            var from2 = $inp.data("from"); // reading input data-from attribute
+
+                            var prefAge = document.getElementById("prefAge").value;
+                            prefAge = prefAge.split(";");
+                            document.getElementById("min").value = from2;
+                            document.getElementById("max").value = prefAge[1];
+
+                            console.log(from, from2); // FROM value
+                        });
+                    </script>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="hobby" value="<%= user.hobby %>" placeholder="Hobby">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea4">Hold ctrl/cmd then select min and max of 5</label>
+                    <select id="interest" name="interest" class="form-control" id="exampleFormControlSelect1" multiple>
+                        <% include ./options %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input id="first" type="text" class="form-control" name="first" value="<%= user.interest.first %>"
+                        placeholder="Choice1" hidden>
+                    <input id="second" type="text" class="form-control" name="second"
+                        value="<%= user.interest.second %>" placeholder="Choice2" hidden>
+                    <input id="third" type="text" class="form-control" name="third" value="<%= user.interest.third %>"
+                        placeholder="Choice3" hidden>
+                    <input id="fourth" type="text" class="form-control" name="fourth"
+                        value="<%= user.interest.fourth %>" placeholder="Choice4" hidden>
+                    <input id="fifth" type="text" class="form-control" name="fifth" value="<%= user.interest.fifth %>"
+                        placeholder="Choice5" hidden>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        var last_selec = null;
+                        $("#interest").change(function () {
+                            if ($(this).val().length > 5) {
+                                $(this).val(last_selec);
+                            }
+                            else {
+                                last_selec = $(this).val();
+                                console.log(last_selec);
+                                document.getElementById("first").value = last_selec[0];
+                                document.getElementById("second").value = last_selec[1];
+                                document.getElementById("third").value = last_selec[2];
+                                document.getElementById("fourth").value = last_selec[3];
+                                document.getElementById("fifth").value = last_selec[4];
+                            }
+                        });
+                    });
+                </script>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="language" value="<%= user.language %>"
+                        placeholder="Language">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="nationality" value="<%= user.nationality %>"
+                        placeholder="Nationality">
+                </div>
+                <div class="form-group">
+                    <select name="ethnicity" class="form-control" id="exampleFormControlSelect1">
+                        <option><%= user.ethnicity %></option>
+                        <option>Black</option>
+                        <option>White</option>
+                        <option>Colored</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="countryOfResidence"
+                        value="<%= user.countryOfResidence %>" placeholder="Country Of Residence">
+                </div>
+                <div class="form-group purple-border">
+                    <textarea class="form-control" name="bio" id="exampleFormControlTextarea4"
+                        rows="3"><%= user.bio %></textarea>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i> Update</button>
+                </div>
+            </form>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-12">
-                Upload Profile Picture @<%= user.firstname %>
-                <hr>
-                <form action="/ppUpdate" method="post">
-                    <div class="form-group">
-                        <input type="file" id="inp">
-                        <hr>
-                        <input type="text" class="form-control" name="profile" id="b64" readonly />
-                        <hr>
-                        <img height="200" id="img">
-                    </div>
-                    <button type="submit" class="btn btn-success">Upload</button>
-                </form>
-            </div>
+
+        <div class="col-sm-6">
+            <form action="/location" method="post">
+                <div class="form-group">
+                    <input onclick="googleLocation()" type="text" class="form-control" name="country" id="country"
+                        placeholder="Click To get Location" value="<%= user.countryOfResidence %>" readonly />
+                    <br>
+                    <input onclick="googleLocation()" type="text" class="form-control" name="state" id="state"
+                        placeholder="Click To get Location" value="<%= user.state %>" readonly />
+                    <br>
+                    <input onclick="googleLocation()" type="text" class="form-control" name="city" id="city"
+                        placeholder="Click To get Location" value="<%= user.city %>" readonly />
+                    <input onclick="googleLocation()" type="text" class="form-control" name="longitude" id="longitude"
+                        placeholder="Click To get Location" value="<%= user.longitude %>" hidden />
+                    <input onclick="googleLocation()" type="text" class="form-control" name="latitude" id="latitude"
+                        placeholder="Click To get Location" value="<%= user.latitude %>" hidden />
+                    <hr>
+                    <!-- <div id="mapHolder"></div> -->
+                </div>
+                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
+            </form>
             <br>
-            <div class="col-md-12">
-                Kindly Provide Us With <%= user.username %>'s Location
-                <hr>
-                <form action="/location" method="post">
-                    <div class="form-group">
-                        <input onclick="googleLocation()" type="text" class="form-control" name="country" id="country"
-                            placeholder="Click To get Location" value="<%= user.countryOfResidence %>" readonly />
-                        <br>
-                        <input onclick="googleLocation()" type="text" class="form-control" name="state" id="state"
-                            placeholder="Click To get Location" value="<%= user.state %>" readonly />
-                        <br>
-                        <input onclick="googleLocation()" type="text" class="form-control" name="city" id="city"
-                            placeholder="Click To get Location" value="<%= user.city %>" readonly />
-                        <input onclick="googleLocation()" type="text" class="form-control" name="longitude" id="longitude"
-                            placeholder="Click To get Location" value="<%= user.longitude %>" hidden />
-                        <input onclick="googleLocation()" type="text" class="form-control" name="latitude" id="latitude"
-                            placeholder="Click To get Location" value="<%= user.latitude %>" hidden />
-                        <hr>
-                        <!-- <div id="mapHolder"></div> -->
-                    </div>
-                    <button type="submit" class="btn btn-success">Add</button>
-                </form>
-            </div>
+            <form action="/ppUpdate" method="post">
+                <div class="form-group">
+                    <input type="file" id="inp">
+                    <hr>
+                    <input type="text" class="form-control" name="profile" id="b64" hidden/>
+                    <img height="200" id="img">
+                </div>
+                <button type="submit" class="btn btn-success"><i class="fas fa-upload"></i> Upload</button>
+            </form>
+            <form action="/delPic" method="post">
+                <button type="submit" class="btn btn-success"><i class="fas fa-minus"></i> Delete Profile Pic</button>
+            </form>
         </div>
     </div>
 </div>
@@ -104,7 +171,7 @@
     // Getting User Location Without Permission
     function googleLocation() {
         $.getJSON('https://geoip-db.com/json/')
-            .done(function(location) {
+            .done(function (location) {
                 console.log(location);
                 $('#country').val(location.country_name);
                 $('#state').val(location.state);

@@ -1,12 +1,13 @@
 body {
-  background-color: maroon !important;
+  background-color: #465362 !important;
+  color: #82A3A1 !important;
 }
 hr {
-  background-color: maroon;
+  background-color: #82A3A1;
 }
 .navbar.navbar-expand-lg.navbar-light { 
-  background-color: wheat;
-  border-bottom: 2px solid white;
+  background-color: #465362;
+  border-bottom: 2px solid #82A3A1;
   padding: 0px 0px !important;
 }
 .navbar.navbar-expand-lg.navbar-light > img{
@@ -14,12 +15,17 @@ hr {
 }
 .navbar-brand {
   margin: 5px 10px 5px 10px !important;
-  /* padding: 5px 5px !important; */
-  color: maroon !important;
+  color: #82A3A1 !important;
   font-weight: 600;
 }
 a.nav-link {
   padding: 6px 12px 6px 12px !important;
+}
+a.nav-link:hover {
+  color: white !important;
+}
+a.navbar-brand:hover {
+  color: white !important;
 }
 input.form-control.mr-sm-2 {
   padding: 6px 5px 6px 5px !important;
@@ -28,17 +34,16 @@ input.form-control.mr-sm-2 {
   margin: 5px 10px 5px 10px !important;
 }
 .form-inline input[type="search"] {
-  color: maroon !important;
+  color: white !important;
 }
 .form-control.mr-sm-2 {
   margin: 5px 10px 5px 10px !important;
 }
 .nav-link {
   text-decoration: none !important;
-  color: maroon !important;
+  color: #82A3A1 !important;
   font-weight: 500;
 }
-
 /* Login form */
 .modal-login {
   color: #636363;
@@ -49,7 +54,6 @@ input.form-control.mr-sm-2 {
   padding: 20px;
   border-radius: 5px;
   border: none;
-  /* margin: 500px 0px 100px 0px !important; */
 }
 
 .modal-login .modal-header {
@@ -61,12 +65,12 @@ input.form-control.mr-sm-2 {
 .modal-login h4 {
   text-align: center;
   font-size: 26px;
-  color: maroon !important;
+  color: #465362 !important;
   margin: 30px 0 -15px;
 }
 
 .modal-login .form-control:focus {
-  border-color: #70c5c0;
+  border-color: #465362;
 }
 
 .modal-login .form-control,
@@ -76,7 +80,7 @@ input.form-control.mr-sm-2 {
 }
 
 .modal-login .modal-footer {
-  background: wheat;
+  background: #465362;
   text-align: center;
   justify-content: center;
   margin: 0 -20px -20px;
@@ -84,7 +88,7 @@ input.form-control.mr-sm-2 {
 }
 
 .modal-login .modal-footer a {
-  color: maroon;
+  color: white;
 }
 
 .modal-login .avatar {
@@ -97,7 +101,7 @@ input.form-control.mr-sm-2 {
   height: 95px;
   border-radius: 50%;
   z-index: 9;
-  background: wheat;
+  background: #465362;
   padding: 15px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
@@ -111,9 +115,9 @@ input.form-control.mr-sm-2 {
 }
 
 .modal-login .btn {
-  color: maroon;
+  color: white;
   border-radius: 4px;
-  background: wheat;
+  background: #465362;
   text-decoration: none;
   transition: all 0.4s;
   line-height: normal;
@@ -122,7 +126,8 @@ input.form-control.mr-sm-2 {
 
 .modal-login .btn:hover,
 .modal-login .btn:focus {
-  background: #45aba6;
+  background: white;
+  color: #011936;
   outline: none;
 }
 
@@ -132,20 +137,16 @@ input.form-control.mr-sm-2 {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: wheat;
+  background-color: #465362;
   text-align: center;
   font-weight: bold;
-  padding: 5px 5px 5px 5px;
-  border-top: 2px solid white;
+  padding: 15px;
+  border-top: 2px solid #82A3A1;
 }
 
 .footer a {
-  color: maroon;
+  color: #82A3A1;
   text-decoration: none;
-}
-
-.footer p {
-  color: maroon;
 }
 
 /* Middle div on index page */
@@ -155,19 +156,68 @@ input.form-control.mr-sm-2 {
   position: absolute;
   top: 40%;
   left: 20%;
-  background-color: wheat;
+  background-color: #465362;
   border-top-left-radius: 1vmin;
   border-bottom-right-radius: 1vmin;
-  box-shadow: 5px 5px 10px white;
+  box-shadow: 5px 5px 10px #82A3A1;
+  text-align: center;
 }
 .index > img {
   width: 100%;
+}
+
+/* DropDown For other sites! */
+.dropbtn {
+  background-color: #465362;
+  color: #82A3A1;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+}
+.dropbtn:hover {
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  text-align: center;
+  display: none;
+  position: absolute;
+  background-color: #465362;
+  border-bottom-left-radius: 4px;
+  min-width: 120px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #82A3A1;
+  padding: 8px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover { background-color: #465362; color: white; text-decoration: none; }
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #465362;
 }
 
 /* Error and Success messages */
 .msgx {
   width: 50%;
   margin: auto;
+  background-color: #82A3A1 !important;
+  color: #465362 !important;
 }
 
 .profile {
@@ -180,33 +230,177 @@ input.form-control.mr-sm-2 {
 }
 
 .col.up {
-  background-color: wheat !important;
+  background-color: #011936 !important;
   font-weight: 100;
-  color: maroon;;
+  color: #465362;;
 }
 
 .col-md-12 {
-  background-color: wheat;
-  color: maroon;
+  background-color: #465362;
+  color: white;
   border-radius: 2px;
-  border: 2px solid white;
+  border: 2px solid #82A3A1;
   font-weight: bold;
-  text-align: center;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 2vmin;
+}
+.col-md-12.height {
+  height: 80vmax;
+  overflow: auto;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  /* width: 0px;
+  background: transparent; */
+  display: none;
 }
 
 .col-md-12 > img {
   width: 100%;
+  border-radius: 10px;
 }
 
 .col-md-6 {
   padding-bottom: 5px;
 }
 
-.btn.btn-danger {
-  margin-bottom: 1%;
-  margin-top: 1%;
+.btn.btn-success {
+  background-color: #82A3A1 !important;
+  border-color: #82A3A1;
+  color: #465362;
 }
-.btn.btn-danger > a {
-  text-decoration: none !important;
-  color: wheat;
+.btn.btn-success:hover {
+  color: #636363;
+  background-color: #465362;
+  border-color: #465362;
+}
+
+/* Notification Styling begin */
+
+/* Notification Styling end */
+
+/* Slider Color Change begin*/
+.irs--flat .irs-handle>i:first-child {
+  background-color: #82A3A1 !important;
+}
+.irs--flat .irs-bar {
+  background-color: #82A3A1 !important;
+}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single {
+  background-color: #82A3A1 !important;
+}
+.irs--flat .irs-from:before, .irs--flat .irs-to:before, .irs--flat .irs-single:before {
+  border-top-color: #82A3A1 !important;
+}
+/* Slider Color Change end*/
+
+/* Chats */
+#chat {
+  height: 800px; 
+  color: white;
+  overflow: auto;
+  padding: 10px;
+}
+#users {
+  overflow: auto;
+}
+.eachUsr {
+  padding: 10px;
+}
+.eachUsr:hover {
+  background-color: #465362;
+}
+.head {
+  background: #465362;
+  padding: 10px;
+  text-align: center;
+}
+.head > img {
+  width: 20%;
+}
+.chatbx {
+  border: 2px solid #82A3A1;
+  background: #465362;
+  border-radius: 3px;
+}
+.flex {
+  width: 100%;
+}
+.flxFst {
+  display: inline-block;
+  flex-grow: 0;
+  width: 100px;
+}
+.msgDia {
+  background-color: #011936;
+  border-radius: 3px;
+  padding: 5px;
+  display: inline-block;
+  flex-grow: 1000;
+  min-width: 600px;
+}
+.mthLst {
+  background: #465362;
+  padding: 0px !important;
+}
+/* Chats */
+.insideTops {
+  background-image: url('../images/men-2425121_1920.jpg');
+  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 50%;
+}
+.insideTops > img {
+  width: 100%;
+}
+.insideUndTops {
+  border-top: solid #82A3A1;
+  background-color: #465362;
+  border-bottom: solid #82A3A1;
+  width: 100%;
+}
+.container {
+  text-align: center;
+}
+.col-sm > img {
+  padding: 5px;
+  width: 100%;
+  border-radius: 10px;
+}
+.insideBtn {
+  background-image: url('../images/djim-loic-HL4MRlEyqxU-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-size: cover;
+  height: 50%;
+  padding: 40px;
+}
+.about {
+  width: 50%;
+  height: 60%;
+  margin-top: 20%;
+  background-color: #465362;
+  border-radius: 6px;
+  padding: 5px;
+  color: #82A3A1;
+  text-align: center;
+}
+
+.name {
+  width: 90%;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Sedgwick Ave Display', cursive;
+  font-size: 100;
+  color: white;
+}
+.name > img {
+  width: 20%;
+  filter: invert(100%);
 }

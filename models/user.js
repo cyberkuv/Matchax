@@ -11,12 +11,25 @@ const usrSchema = new mongoose.Schema({
     username: { type: String, unique: true,  },
     password: { type: String, minlength: 6 },
     verified: { type: Boolean, default: false },
-    preference: { type: String },
+    active: { type: Boolean, default: true },
+    prefAge: {
+        min: { type: Number },
+        max: { type: Number }
+    },
     hobby: { type: String },
-    interest: { type: String },
+    interest: {
+        first: { type: String },
+        second: { type: String },
+        third: { type: String },
+        fourth: { type: String },
+        fifth: { type: String }
+    },
+    bio: { type: String },
     language: { type: String },
     nationality: { type: String },
+    ethnicity: { type: String },
     countryOfResidence: { type: String },
+    numLikes: { type: Number },
     createdDate: { type: Date, default: Date.now },
     state: { type: String },
     city: { type: String },

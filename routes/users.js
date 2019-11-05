@@ -23,16 +23,15 @@ router.post('/signu',
   (req, res) => {
     const {
       firstname, lastname, gender, age, username,
-      email, password, rpassword, verified, preference,
-      hobby, interest, language, nationality,
-      countryOfResidence
+      email, password, rpassword, verified,
+      hobby, language, nationality, ethnicity, countryOfResidence
     } = req.body;
     let errors = [];
 
-    if (!firstname || !lastname || !gender || !age ||
-      !preference || !hobby || !interest || !language ||
-      !nationality || !countryOfResidence ||
-      !username || !email || !password || !rpassword) {
+    if (!firstname || !lastname || !gender || !age
+      || !hobby || !language || !ethnicity ||
+      !nationality || !countryOfResidence || !username ||
+      !email || !password || !rpassword) {
       errors.push({ msg: 'Fields cannot be empty!' });
     }
 
@@ -52,8 +51,7 @@ router.post('/signu',
       res.render('signu', {
         errors, firstname, lastname, gender, age,
         username, email, password, rpassword, preference,
-        hobby, interest, language, nationality,
-        countryOfResidence
+        hobby, language, nationality, ethnicity, countryOfResidence
       });
     } else {
       User.findOne({ email: email }).then(user => {
@@ -66,9 +64,8 @@ router.post('/signu',
         } else {
           const newUser = new User({
             firstname, lastname, gender, age, username,
-            email, password, verified, preference,
-            hobby, interest, language, nationality,
-            countryOfResidence
+            email, password, verified, hobby,
+            language, nationality, ethnicity , countryOfResidence
           });
 
           const link = 'https://matchax.herokuapp.com/verify';

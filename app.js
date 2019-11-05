@@ -13,6 +13,9 @@ var userRouter = require('./routes/users');
 var keys = require('./config/keys');
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+var users = {};
 
 // passport configuration
 require('./config/passport')(passport);
@@ -81,5 +84,26 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+io.sockets.on('connection', function(socket) {
+  socket.on('new user', function(data, callback) {
+    if(data in users) {
+      callback(false);
+    } else {
+      callback(true); 
+      socket.nickname = data;
+      users[socket.nickname] = socket;
+      io.sockets.emit('usernames', Object.keys(users))
+    }
+  });
+  socket.on('sent msgs', function(data) {
+    io.sockets.emit('new msg', { msg: data, username: socket.nickname });
+  });
+  socket.on('disconnect', function(data) {
+    if(!socket.nickname) return ;
+    delete users[socket.nickname];
+    io.sockets.emit('usernames', Object.keys(users));
+  });
+});
+
 const port = process.env.PORT || 4000;
-app.listen(port, ()=> { console.log(`[Listening on http://localhost:${port}]`) });
+server.listen(port, ()=> { console.log(`[Listening on http://localhost:${port}]`) });

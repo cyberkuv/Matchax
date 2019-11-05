@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-    <img src="./images/4.png" alt="icon">
-    <!-- <a class="navbar-brand" href="#">Matcha</a> -->
+    <a class="navbar-brand" href="/"><i class="fas fa-kiss-wink-heart"></i> MatchYa</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,17 +8,28 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/profile"> Welcome@<%= user.username %> <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/profile"><i class="fas fa-address-card"></i> Profile<span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/update"> Update </a>
+                <a class="nav-link" href="/update"><i class="fas fa-edit"></i> Update </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/matches"> Matches </a>
+                <a class="nav-link" href="/matches"><i class="fas fa-infinity"></i> Matches </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/chats"><i class="fas fa-comments"></i> Chats </a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-                <a class="nav-link" href="/logout"> Logout </a>
+            <% if(user.active == true) { %>
+                <a class="nav-link" href="#"><i class="fas fa-signal"></i> Online</a>
+            <% } else { %>
+                <a class="nav-link" href="#"><i class="fas fa-plug"></i> Offline</a>
+            <% } %>
+            <a class="nav-link" href="#"><i class="fas fa-bell"></i> Notification
+                <!-- <% include ./notify %></a> -->
+            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout </a>
         </form>
     </div>
 </nav>

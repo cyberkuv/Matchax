@@ -1,53 +1,91 @@
-<div class="container profile">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12" style="font-size: 15px;">User Info
-                <hr>
-                <% if(user.profilePic) { %>
-                <img style="border-radius: 10px;" src="<%= user.profilePic %>" alt="profile pic">
-                <% } else { %>
-                <img style="border-radius: 20px;" src="./images/595865.jpg" alt="profile pic">
-                <% } %>
-                <hr>
-                <div class="col">Username : <%= user.username %></div>
-                <hr>
-                <div class="col">Name : <%= user.firstname %></div>
-                <div class="col">Surname :<%= user.lastname %></div>
-                <div class="col">Age : <%= user.age %></div>
-                <div class="col">Email : <%= user.email %></div>
-                <div class="col">Gender : <%= user.gender %></div>
-                <hr>
-                Preference
-                <div class="col"><%= user.preference %></div>
-                <hr>
-                Hobby
-                <div class="col"><%= user.hobby %></div>
-                <hr>
-                Interest
-                <div class="col"><%= user.interest %></div>
-                <hr>
-                Language
-                <div class="col"><%= user.language %></div>
-                <hr>
-                Nationality
-                <div class="col"><%= user.nationality %></div>
-                <hr>
-                Location
-                <div class="col">Country : <%= user.countryOfResidence %></div>
-                <div class="col">State : <%= user.state %></div>
-                <div class="col">City : <%= user.city %></div>
-                <hr>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <%= user.username %>'s Matches
-                <hr>
-            </div>
-        </div>
-        <!-- <form action="/location">
-            <input type="text" class="form-control" name="longitude" id="longitude" hidden />
-            <input type="text" class="form-control" name="latitude" id="latitude" hidden />
-        </form> -->
+<div class="container">
+    <h1><i class="fas fa-signature"></i> <%= user.firstname %> <%= user.lastname %></h1>
+    <% if(user.profilePic) { %>
+    <img style="border-radius: 10px; width: 100%; margin-bottom: 10px;" src="<%= user.profilePic %>" alt="profile pic">
+    <% } else { %>
+    <img style="filter: invert(80%);"
+        src="https://icon-library.net/images/heart-icon-png-transparent/heart-icon-png-transparent-22.jpg"
+        alt="profile pic">
+    <% } %>
+    <div class="col" style="text-align: center;">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
     </div>
-</div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h4>About:</h4> 
+            <div class="col">Username : <%= user.username %></div>
+            <div class="col">Age : <%= user.age %></div>
+            <div class="col">Gender : <%= user.gender %></div>
+            <div class="col">Language: <%= user.language %></div>
+            <br>
+            <div class="col">Bio: <%= user.bio %></div>
+            <div class="col">
+                <div class="form-group">
+                    <input type="text" name="prefAge" id="prefAge">
+                    <script type="text/javascript">
+                        var $pref = $("#prefAge");
+                        $pref.ionRangeSlider({
+                            type: "double",
+                            skin: "flat",
+                            min: 18,
+                            max: 60,
+                            from: '<%= user.prefAge.min %>',
+                            to: '<%= user.prefAge.max %>',
+                            prefix: 'Ages: ',
+                            from_fixed: true,
+                            to_fixed: true
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <h4>Interest</h4>
+                    <% if(user.interest.first == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.first %>.</div>
+                    <% } %>
+                    <% if(user.interest.second == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.second %>.</div>
+                    <% } %>
+                    <% if(user.interest.third == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.third %>.</div>
+                    <% } %>
+                    <% if(user.interest.fourth == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.fourth %>.</div>
+                    <% } %>
+                    <% if(user.interest.fifth == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.fifth %>.</div>
+                    <% } %>
+                </div>
+            </div>
+            <hr>
+            <div class="col">
+                <h4>Nationality</h4>
+                <div class="col"><span>&bull;</span>Nationality: <%= user.nationality %></div>
+                <div class="col"><span>&bull;</span>Ethinicity: <%= user.ethnicity %></div>
+            </div>
+            <hr>
+            <div class="col">
+                <h4>Location</h4>
+                <div class="col"><i class="fab fa-font-awesome-flag"></i> Country : <%= user.countryOfResidence %></div>
+                <div class="col"><i class="fas fa-location-arrow"></i> State : <%= user.state %></div>
+                <div class="col"><i class="fas fa-city"></i> City : <%= user.city %></div>
+            </div>
+        </div>
+    </div>
+</div><br><br><br>

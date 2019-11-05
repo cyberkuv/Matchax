@@ -4,13 +4,10 @@
             <div class="avatar">
                 <img src="https://png.pngtree.com/svg/20170518/account_898722.png" alt="Avatar">
             </div>
-            <h4 class="modal-title">Welcome!</h4>
+            <h4 class="modal-title">Welcome to MatchYa!</h4>
         </div>
         <div class="modal-body" style="text-align: center;">
             <form action="/signu" method="post" enctype="">
-                <!-- <div class="form-group">
-                    <input type="file" class="form-control" name="profile" placeholder="Profile Picure" required />
-                </div> -->
                 <div class="form-group">
                     <input type="text" class="form-control" name="firstname" placeholder="Name" required />
                 </div>
@@ -34,27 +31,25 @@
                     <input type="text" class="form-control" name="email" placeholder="Email" required />
                 </div>
                 <div class="form-group">
-                    <select name="preference" class="form-control" id="exampleFormControlSelect1">
-                        <option>Sexual Preference</option>
-                        <option>Male</option>
-                        <option>Female</option>
+                    <input type="text" class="form-control" name="hobby" placeholder="Hobby" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="language" placeholder="Main Language" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="nationality" placeholder="Nationality" required />
+                </div>
+                <div class="form-group">
+                    <select name="ethnicity" class="form-control" id="exampleFormControlSelect1">
+                        <option>Black</option>
+                        <option>White</option>
+                        <option>Colored</option>
+                        <option>Other</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="hobby" placeholder="Hobby" required/>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="interest" placeholder="Interest" required/>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="language" placeholder="Main Language" required/>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="nationality" placeholder="Nationality" required/>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="countryOfResidence"
-                        placeholder="Country Of Residence" required/>
+                    <input type="text" class="form-control" name="countryOfResidence" placeholder="Country Of Residence"
+                        required />
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password" required />
@@ -64,13 +59,14 @@
                         required />
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-btn"><i class="fas fa-user-plus"></i> Sign up</button>
                 </div>
             </form>
-            <a href="/google" title="Google+" class="btn btn-googleplus btn-lg"><i class="fab fa-google-plus-g"></i>Google+</a>
+            <a href="/google" title="Google+" class="btn btn-googleplus btn-lg"><i class="fab fa-google-plus-g"></i></a>
         </div>
         <div class="modal-footer">
             <a href="/signi">Already have an account?</a>
         </div>
     </div>
 </div>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
