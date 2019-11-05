@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                Real Time Chat!
+                <hr>
+                <div class="nickNwrap">
+                    <p>Enter a nick name:</p>
+                    <p id="nickNerror"></p>
+                    <form id="setNickN" class="form-group">
+                        <input type="text" id="nickname" class="form-control" placeholder="click enter to save" required>
+                        <input type="submit" hidden>
+                    </form>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- messing around with actual chat view -->
+
+<div class="container">
+    <div class="row chatbx">
+        <div class="col mthLst">
+            <div class="head">
+                <img src="/images/14-heart-png-image-download-thumb.png" alt="placeholder">
+                Your Matches!</div>
+            <div id="users"></div>
+        </div>
+        <div class="col-8">
+            <div id="chat"></div>
+            <form id="send-messages" class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="messages" placeholder="click enter to send" required>
+                    <span class="input-group-addon"><i class="fas fa-paper-plane"></i></span>
+                </div>
+                <input type="submit" hidden>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- messing around with actual chat view -->
+
+<script>
+    jQuery(function($) {
+        var socket = io.connect();
+        var $nickNform = $('#setNickN');
+        var $nickNerror = $('#nickNerror');
+        var $nickNbox = $('#nickname');
+        var $users = $('#users');
+        var $msgForm = $('#send-messages');
+        var $msg = $('#messages');
+        var $chat = $('#chat');
+
+        $nickNform.submit(function(e) {
+            e.preventDefault();
+            socket.emit('new user', $nickNbox.val(), function(data) {
+                if(data) {
+                    $('#nickWrap').hide();
+                    $('#contentWrap').show();
+                } else {
+                    $nickNerror.html('Username Already Taken. Try Again...');
+                }
+            });
+            $nickNbox.val('');
+        });
+
+        socket.on('usernames', function(data) {
+            var html = '';
+            for(var x = 0; x < data.length; x++) {
+                html += '<div class\="\eachUsr">' + data[x] + '</div>'
+            }
+            $users.html(html);
+        });
+
+        $msgForm.submit(function(e) {
+            e.preventDefault();
+            socket.emit('sent msgs', $msg.val());
+            $msg.val('');
+        });
+        socket.on('new msg', function(data) {
+            $chat.append('<div class\="\flex">' + '<div class\="flxFst">' +'<b>' + data.username + ': '
+                + '</b>' + '</div>' + '<div class\="\msgDia">' + data.msg + '</div>' + '</div>' + '<br/>');
+        });
+    });
+</script>

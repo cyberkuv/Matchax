@@ -1,85 +1,59 @@
-<div class="container profile">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12 height" style="font-size: 15px;">
-                <div class="btn btn-success">
-                    <i class="fas fa-users"></i> Matches!
-                </div>
-                <hr>
-                <% for(var i = 0; i < matches.length; i++) { %>
-                <% if(matches[i].email == user.email) { %>
-                <input type="text" class="form-control" hidden />
-                <% } else { %>
-                <% if(matches[i].gender != user.gender) { %>
-                <% if(matches[i].age >= user.prefAge.min && matches[i].age <= user.prefAge.max) { %>
-                <% if(matches[i].interest && matches[i].interest.first == user.interest.first ||
-                                    matches[i].interest && matches[i].interest.second == user.interest.second ||
-                                    matches[i].interest && matches[i].interest.third == user.interest.third ||
-                                    matches[i].interest && matches[i].interest.fourth == user.interest.fourth ||
-                                    matches[i].interest && matches[i].interest.fifth == user.interest.fifth) { %>
-                <div class="col-md-12" style="background-color: #011936;">
-                    <% if(user.profilePic) { %>
-                    <img style="border-radius: 10px; width: 50%;;" src="<%= user.profilePic %>" alt="profile pic">
-                    <% } else { %>
-                    <img style="border-radius: 10px; width: 50%;" src="./images/14-heart-png-image-download-thumb.png"
-                        alt="profile pic">
-                    <% } %>
-                    <hr>
-                    <div class="col"><span>&bull;</span> Username: <%= matches[i].username %></div>
-                    <div class="col"><span>&bull;</span> Firstname: <%= matches[i].firstname %></div>
-                    <div class="col"><span>&bull;</span> Lastname: <%= matches[i].lastname %></div>
-                    <div class="col"><span>&bull;</span> Age: <%= matches[i].age %></div>
-                    <div class="col"><span>&bull;</span> Gender: <%= matches[i].gender %></div>
-                    <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
-                    <div class="col"><span>&bull;</span> Language: <%= matches[i].language %></div>
-                    <div class="col"><span>&bull;</span> Ethnicity: <%= matches[i].ethnicity %></div>
-                    <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
-                    <div class="col"><span>&bull;</span> Resides in: <%= matches[i].countryOfResidence %>
-                    </div>
-                    <div class="col"><span>&bull;</span> Bio: <%= matches[i].bio %></div>
-                    <hr>
-                    <div class="col">
-                        <button class="btn btn-success liked"><i class="far fa-thumbs-up"></i> like</button>
-                        <p id="likes"></p>
-                    </div>
-                </div>
-                <% } %>
-                <% } %>
-                <% } %>
-                <% } %>
-                <% } %>
-            </div>
+<div class="container">
+    <h1><%= user.firstname %>'s matches!</h1>
+    <% for(var i = 0; i < matches.length; i++) { %>
+    <% if(matches[i].email == user.email) { %>
+    <input type="text" class="form-control" hidden />
+    <% } else { %>
+    <% if(matches[i].gender != user.gender) { %>
+    <% if(matches[i].age >= user.prefAge.min && matches[i].age <= user.prefAge.max) { %>
+    <% if(matches[i].interest && matches[i].interest.first == user.interest.first ||
+                                matches[i].interest && matches[i].interest.second == user.interest.second ||
+                                matches[i].interest && matches[i].interest.third == user.interest.third ||
+                                matches[i].interest && matches[i].interest.fourth == user.interest.fourth ||
+                                matches[i].interest && matches[i].interest.fifth == user.interest.fifth) { %>
+    <div class="col-md-12" style="background-color: #011936;">
+        <% if(matches[i].profilePic) { %>
+        <img style="border-radius: 10px; width: 50%;" src="<%= matches[i].profilePic %>" alt="profile pic">
+        <% } else { %>
+        <img style="border-radius: 10px; width: 50%;" src="./images/14-heart-png-image-download-thumb.png"
+            alt="profile pic">
+        <% } %>
+        <hr>
+        <div class="col"><span>&bull;</span> Username: <%= matches[i].username %></div>
+        <div class="col"><span>&bull;</span> Firstname: <%= matches[i].firstname %></div>
+        <div class="col"><span>&bull;</span> Lastname: <%= matches[i].lastname %></div>
+        <div class="col"><span>&bull;</span> Age: <%= matches[i].age %></div>
+        <div class="col"><span>&bull;</span> Gender: <%= matches[i].gender %></div>
+        <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
+        <div class="col"><span>&bull;</span> Language: <%= matches[i].language %></div>
+        <div class="col"><span>&bull;</span> Ethnicity: <%= matches[i].ethnicity %></div>
+        <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
+        <div class="col"><span>&bull;</span> Resides in: <%= matches[i].countryOfResidence %>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-12 height">
-                <div class="btn btn-success">
-                    <i class="fas fa-comments"></i> Chats!
-                </div>
-                <hr>
-            </div>
+        <div class="col"><span>&bull;</span> Bio: <%= matches[i].bio %></div>
+        <hr>
+        <div class="col">
+            <button class="btn btn-success liked"><i class="fas fa-thumbs-up"></i> Like</button>
+            <!-- <button class="btn btn-success liked"><i class="far fa-heart"></i> <span class="likes">0</span></button> -->
         </div>
     </div>
+    <% } %>
+    <% } %>
+    <% } %>
+    <% } %>
+    <% } %>
 </div>
 <script>
-    // function like() {
-    //     var x = 0;
-    //     x = x + 1;
-    //     document.getElementById("likes").innerHTML = x;
-    // }
-
-    $('.liked').click(function() {
-        var check = $(this);
-        var x = 0;
-        if(check.is(':checked')) {
-            x = x + 1;
-            console.log("incre" + x);
-            document.getElementById("likes").innerHTML = x;
-        } else {
-            x = x - 1;
-            console.log("decre" + x);
-            document.getElementById("likes").innerHTML = x;
-        }
-    })
+    $(function () {
+        $('.liked').on('click', function () {
+            let val = parseInt($('.likes').text());
+            if ($(this).text() == ' Like') {
+                $(this).removeClass('fas fa-thumbs-up').addClass('fas fa-thumbs-down').text(' Unlike');
+            } else {
+                $(this).removeClass('fas fa-thumbs-down').addClass('fas fa-thumbs-up').text(' Like');
+            }
+        });
+    });
 
     function calcDis(lat1, lon1, lat2, lon2, unit) {
         if ((lat1 == lat2) && (lon1 == lon2)) {

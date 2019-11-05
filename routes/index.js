@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+// const User = require('../models/user');
 const MongoClient = require('mongodb').MongoClient;
 const datab = require('../config/database').mongoURI;
-const bcrypt = require('bcryptjs');
+// const bcrypt = require('bcryptjs');
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 // Welcome Page
@@ -114,7 +114,7 @@ router.post('/delPic', (req, res)=> {
       if(err) throw err;
       db.close();
     });
-    res.redirect('/update');
+    res.redirect('/profile');
   });
 });
 
@@ -171,6 +171,10 @@ router.get('/matches', ensureAuthenticated, (req, res)=> {
       db.close();
     });
   });
+});
+
+router.get('/chats', ensureAuthenticated, (req, res)=> {
+  res.render('chat', { user: req.user });
 });
 
 // Forget password

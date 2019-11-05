@@ -11,7 +11,7 @@ const usrSchema = new mongoose.Schema({
     username: { type: String, unique: true,  },
     password: { type: String, minlength: 6 },
     verified: { type: Boolean, default: false },
-    active: { type: Boolean, default: false },
+    active: { type: Boolean, default: true },
     prefAge: {
         min: { type: Number },
         max: { type: Number }
@@ -29,6 +29,7 @@ const usrSchema = new mongoose.Schema({
     nationality: { type: String },
     ethnicity: { type: String },
     countryOfResidence: { type: String },
+    numLikes: { type: Number },
     createdDate: { type: Date, default: Date.now },
     state: { type: String },
     city: { type: String },

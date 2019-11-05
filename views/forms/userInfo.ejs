@@ -1,41 +1,30 @@
-<div class="container profile">
+<div class="container">
+    <h1><i class="fas fa-signature"></i> <%= user.firstname %> <%= user.lastname %></h1>
+    <% if(user.profilePic) { %>
+    <img style="border-radius: 10px; width: 100%; margin-bottom: 10px;" src="<%= user.profilePic %>" alt="profile pic">
+    <% } else { %>
+    <img style="filter: invert(80%);"
+        src="https://icon-library.net/images/heart-icon-png-transparent/heart-icon-png-transparent-22.jpg"
+        alt="profile pic">
+    <% } %>
+    <div class="col" style="text-align: center;">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <hr>
     <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12 height" style="font-size: 15px;">
-                <div class="btn btn-success">
-                    <i class="fas fa-home"></i> <%= user.firstname %>!
-                </div>
-                <hr>
-                <% if(user.profilePic) { %>
-                <img style="border-radius: 10px;" src="<%= user.profilePic %>" alt="profile pic">
-                <% } else { %>
-                <img style="border-radius: 20px;" src="./images/14-heart-png-image-download-thumb.png" alt="profile pic">
-                <% } %>
-                <hr>
-                <div class="col" style="text-align: center;">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <hr>
-                Bio:
-                <div class="col"><span>&bull;</span> <%= user.bio %></div>
-                <hr>
-                <div class="col"><span>&bull;</span> Username : <%= user.username %></div>
-                <div class="col"><span>&bull;</span> Name : <%= user.firstname %></div>
-                <div class="col"><span>&bull;</span> Surname :<%= user.lastname %></div>
-                <div class="col"><span>&bull;</span> Age : <%= user.age %></div>
-                <div class="col"><span>&bull;</span> Email : <%= user.email %></div>
-                <div class="col"><span>&bull;</span> Gender : <%= user.gender %></div>
-                <hr>
-                Preference:
-                <% if(user.gender == "Male") { %>
-                    <div class="col"><span>&bull;</span>Female</div>
-                <% } else if(user.gender == "Female"){ %>
-                    <div class="col"><span>&bull;</span>Male</div>
-                <% } %>
+        <div class="col">
+            <h4>About:</h4> 
+            <div class="col">Username : <%= user.username %></div>
+            <div class="col">Age : <%= user.age %></div>
+            <div class="col">Gender : <%= user.gender %></div>
+            <div class="col">Language: <%= user.language %></div>
+            <br>
+            <div class="col">Bio: <%= user.bio %></div>
+            <div class="col">
                 <div class="form-group">
                     <input type="text" name="prefAge" id="prefAge">
                     <script type="text/javascript">
@@ -53,79 +42,50 @@
                         });
                     </script>
                 </div>
-                <hr>
-                Hobby:
-                <div class="col"><span>&bull;</span> <%= user.hobby %></div>
-                <hr>
-                Interest:
-                <% if(user.interest.first == "undefined") { %>
-                <div class="col"><span>&bull;</span> ---------.</div>
-                <% } else { %>
-                <div class="col"><span>&bull;</span> <%= user.interest.first %>.</div>
-                <% } %>
-                <% if(user.interest.second == "undefined") { %>
-                <div class="col"><span>&bull;</span> ---------.</div>
-                <% } else { %>
-                <div class="col"><span>&bull;</span> <%= user.interest.second %>.</div>
-                <% } %>
-                <% if(user.interest.third == "undefined") { %>
-                <div class="col"><span>&bull;</span> ---------.</div>
-                <% } else { %>
-                <div class="col"><span>&bull;</span> <%= user.interest.third %>.</div>
-                <% } %>
-                <% if(user.interest.fourth == "undefined") { %>
-                <div class="col"><span>&bull;</span> ---------.</div>
-                <% } else { %>
-                <div class="col"><span>&bull;</span> <%= user.interest.fourth %>.</div>
-                <% } %>
-                <% if(user.interest.fifth == "undefined") { %>
-                <div class="col"><span>&bull;</span> ---------.</div>
-                <% } else { %>
-                <div class="col"><span>&bull;</span> <%= user.interest.fifth %>.</div>
-                <% } %>
-                <hr>
-                Language:
-                <div class="col"><span>&bull;</span> <%= user.language %></div>
-                <hr>
-                Nationality:
-                <div class="col"><span>&bull;</span> <%= user.nationality %></div>
-                Ethnicity:
-                <div class="col"><span>&bull;</span> <%= user.ethnicity %></div>
-                <hr>
-                Location:
-                <div class="col"><span>&bull;</span> Country : <%= user.countryOfResidence %></div>
-                <div class="col"><span>&bull;</span> State : <%= user.state %></div>
-                <div class="col"><span>&bull;</span> City : <%= user.city %></div>
-                <hr>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-12 height">
-                    <div class="btn btn-success">
-                        Other <i class="fas fa-users"></i> Users
-                    </div>
-                <hr>
+            <div class="col">
                 <div class="col">
-                    <% for(var i = 0; i < obj.length; i++) { %>
-                        <% if(obj[i].email == user.email) { %>
-                        <% } else { %>
-                            <div class="col-md-12" style="background-color: #011936;">
-                                <% if(obj[i].profilePic) { %>
-                                    <img src="<%= obj[i].profilePic %>" style="width: 40%;" alt="profile pic">
-                                <% } else { %>
-                                    <img src="./images/14-heart-png-image-download-thumb.png" style="width: 40%;" alt="profile pic">
-                                <% } %>
-                                <div class="col"><span>&bull;</span> Username: <%= obj[i].username %></div>
-                                <div class="col"><span>&bull;</span> Firstname: <%= obj[i].firstname %></div>
-                                <div class="col"><span>&bull;</span> Lastname: <%= obj[i].lastname %></div>
-                                <div class="col"><span>&bull;</span> Age: <%= obj[i].age %></div>
-                                <div class="col"><span>&bull;</span> Gender: <%= obj[i].gender %></div>
-                            </div>
-                        <% } %>
+                    <h4>Interest</h4>
+                    <% if(user.interest.first == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.first %>.</div>
+                    <% } %>
+                    <% if(user.interest.second == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.second %>.</div>
+                    <% } %>
+                    <% if(user.interest.third == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.third %>.</div>
+                    <% } %>
+                    <% if(user.interest.fourth == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.fourth %>.</div>
+                    <% } %>
+                    <% if(user.interest.fifth == "undefined") { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> add interest.</div>
+                    <% } else { %>
+                    <div class="col"><i class="fas fa-hashtag"></i> <%= user.interest.fifth %>.</div>
                     <% } %>
                 </div>
             </div>
+            <hr>
+            <div class="col">
+                <h4>Nationality</h4>
+                <div class="col"><span>&bull;</span>Nationality: <%= user.nationality %></div>
+                <div class="col"><span>&bull;</span>Ethinicity: <%= user.ethnicity %></div>
+            </div>
+            <hr>
+            <div class="col">
+                <h4>Location</h4>
+                <div class="col"><i class="fab fa-font-awesome-flag"></i> Country : <%= user.countryOfResidence %></div>
+                <div class="col"><i class="fas fa-location-arrow"></i> State : <%= user.state %></div>
+                <div class="col"><i class="fas fa-city"></i> City : <%= user.city %></div>
+            </div>
         </div>
     </div>
-</div>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</div><br><br><br>
