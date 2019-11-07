@@ -21,7 +21,10 @@ module.exports = function(passport) {
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
           if (isMatch) {
-            return done(null, user);
+            User.updateOne({_id: user._id}, { active: true }, (err, res)=> {
+              if(err) throw err;
+              return done(null, user);
+            });
           } else {
             return done(null, false, { message: 'Password Incorrect' });
           }

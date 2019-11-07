@@ -1,5 +1,5 @@
 <div class="container">
-    <h1><%= user.firstname %>'s matches!</h1>
+    <h1><i class="fas fa-user-friends"></i> <%= user.firstname %>'s matches!</h1>
     <% for(var i = 0; i < matches.length; i++) { %>
     <% if(matches[i].email == user.email) { %>
     <input type="text" class="form-control" hidden />
@@ -11,17 +11,19 @@
                                 matches[i].interest && matches[i].interest.third == user.interest.third ||
                                 matches[i].interest && matches[i].interest.fourth == user.interest.fourth ||
                                 matches[i].interest && matches[i].interest.fifth == user.interest.fifth) { %>
-    <div class="col-md-12" style="background-color: #011936;">
+    <div class="col-md-12">
         <% if(matches[i].profilePic) { %>
         <img style="border-radius: 10px; width: 50%;" src="<%= matches[i].profilePic %>" alt="profile pic">
         <% } else { %>
-        <img style="border-radius: 10px; width: 50%;" src="./images/14-heart-png-image-download-thumb.png"
+        <img style="border-radius: 10px; width: 50%; filter: invert(80%);"
+            src="https://icon-library.net/images/heart-icon-png-transparent/heart-icon-png-transparent-22.jpg"
             alt="profile pic">
         <% } %>
         <hr>
         <div class="col"><span>&bull;</span> Username: <%= matches[i].username %></div>
         <div class="col"><span>&bull;</span> Firstname: <%= matches[i].firstname %></div>
         <div class="col"><span>&bull;</span> Lastname: <%= matches[i].lastname %></div>
+        <div class="w-100"></div>
         <div class="col"><span>&bull;</span> Age: <%= matches[i].age %></div>
         <div class="col"><span>&bull;</span> Gender: <%= matches[i].gender %></div>
         <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
@@ -34,9 +36,8 @@
         <hr>
         <div class="col">
             <button class="btn btn-success liked"><i class="fas fa-thumbs-up"></i> Like</button>
-            <!-- <button class="btn btn-success liked"><i class="far fa-heart"></i> <span class="likes">0</span></button> -->
         </div>
-    </div>
+    </div><br><br>
     <% } %>
     <% } %>
     <% } %>

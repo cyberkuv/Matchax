@@ -8,10 +8,10 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.google.clientSecret,
     callbackURL: keys.google.callbackURL
 }, (accessToken, refreshToken, profile, cb) => {
-    console.log(profile);
+    // console.log(profile);
     User.findOne({ googleId: profile.id }).then((currUser) => {
         if (currUser) {
-            return cb(null, currUser, { message: 'User already exists!' });
+            return cb(null, currUser, { error_msg: 'User already exists!' });
         }
         else {
             new User({
@@ -24,7 +24,10 @@ passport.use(new GoogleStrategy({
                 gender: profile._json.gender,
                 verified: profile._json.email_verified
             }).save().then((newUser) => {
-                return cb(null, newUser, { message: 'User Created!' });
+                User.updateOne({googleId: newUser.googleId}, { active: true }, (err, res)=> {
+                    if(err) throw err;
+                });
+                return cb(null, newUser, { success_msg: 'User Created!' });
             });
         }
     });

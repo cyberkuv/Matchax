@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const User = require('../models/user');
+const Notification = require('../models/notification');
 const MongoClient = require('mongodb').MongoClient;
 const datab = require('../config/database').mongoURI;
 // const bcrypt = require('bcryptjs');
@@ -40,9 +40,9 @@ router.post('/verify', (req, res)=> {
     const change = { $set: { verified: true } };
     dbObject.collection("users").updateOne(query, change, (err, res)=> {
       if(err) throw err;
-      req.flash('success_msg', 'Account Successfully Verified!');
       db.close();
     });
+    req.flash('success_msg', 'Account Successfully Verified!');
     res.redirect('/');
   });
 });
@@ -75,9 +75,9 @@ router.post('/update', ensureAuthenticated, (req, res)=> {
       language: language, nationality: nationality, countryOfResidence: countryOfResidence, bio: bio } };
     dbObject.collection("users").findOneAndUpdate(query, change, (err, res)=> {
       if(err) throw err;
-      req.flash('success_msg', 'Details Updated!');
       db.close();
     });
+    req.flash('success_msg', 'Details Updated!');
     res.redirect('/profile');
   });
 });
@@ -94,11 +94,11 @@ router.post('/ppUpdate', (req, res)=> {
     const change = { $set: { profilePic: prof } };
     dbObject.collection("users").updateOne(query, change, (err, res)=> {
       if(err) throw err;
-      req.flash('success_msg', 'Image Uploaded!');
       db.close();
     });
-    res.redirect('/update');
   });
+  req.flash('success_msg', 'Image Uploaded!');
+  res.redirect('/update');
 });
 
 // Delete Profile Pic
@@ -114,8 +114,9 @@ router.post('/delPic', (req, res)=> {
       if(err) throw err;
       db.close();
     });
-    res.redirect('/profile');
   });
+  req.flash('success_msg', 'Profile picture removed, default profile assigned!');
+  res.redirect('/profile');
 });
 
 // Adding Users Longitude and Latutude to database
@@ -134,11 +135,11 @@ router.post('/location', (req, res)=> {
     const change = { $set: { countryOfResidence: country, state: state, city: city, longitude: longitude, latitude: latitude } };
     dbObject.collection("users").updateOne(query, change, (err, res)=> {
       if(err) throw err;
-      req.flash('success_msg', 'User Location Saved!');
       db.close();
     });
-    res.redirect('/update');
   });
+  req.flash('success_msg', 'User Location Saved!');
+  res.redirect('/update');
 });
 
 // Delete
@@ -151,11 +152,11 @@ router.delete('/delete', (req, res) => {
     const query = { email: req.user.email };
     dbObject.collection("users").deleteOne(query, (err, res)=> {
       if(err) throw err;
-      req.flash('success_msg', 'User Deleted!');
       db.close();
     });
-    res.redirect('/signu');
   });
+  req.flash('success_msg', 'So sad to see you leaving us so soon');
+  res.redirect('/');
 });
 
 // Matches
@@ -173,8 +174,29 @@ router.get('/matches', ensureAuthenticated, (req, res)=> {
   });
 });
 
+const Message = require('../models/message');
+
 router.get('/chats', ensureAuthenticated, (req, res)=> {
-  res.render('chat', { user: req.user });
+  Message.find({}, (err, msg)=> {
+    if(err) throw err;
+    res.render('chat', { user: req.user, message: msg});
+  });
+});
+router.post('/chats', ensureAuthenticated, (req, res)=> {
+  var msg = new Message(req.body);
+  msg.save((err)=> {
+    if(err)
+      sendStatus(500);
+    res.sendStatus(200);
+  })
+});
+
+// N2otifications
+router.get('/notification', ensureAuthenticated, (req, res)=> {
+  Notification.find({userId: req.user._id, status: 0}, (err, notif)=> {
+    if(err) throw err;
+    res.send(notif);
+  });
 });
 
 // Forget password

@@ -14,8 +14,7 @@ var keys = require('./config/keys');
 
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
-var users = {};
+var io = require('socket.io')(server);
 
 // passport configuration
 require('./config/passport')(passport);
@@ -84,24 +83,20 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-io.sockets.on('connection', function(socket) {
-  socket.on('new user', function(data, callback) {
-    if(data in users) {
-      callback(false);
-    } else {
-      callback(true); 
-      socket.nickname = data;
-      users[socket.nickname] = socket;
-      io.sockets.emit('usernames', Object.keys(users))
-    }
+// Socket Connection
+io.on('connection', function(socket) {
+  console.log('[A User Connected]');
+  socket.on('sender', (snd)=> {
+    io.emit('sender', snd);
   });
-  socket.on('sent msgs', function(data) {
-    io.sockets.emit('new msg', { msg: data, username: socket.nickname });
+  socket.on('reciever', (recv)=> {
+    io.emit('reciever', recv);
   });
-  socket.on('disconnect', function(data) {
-    if(!socket.nickname) return ;
-    delete users[socket.nickname];
-    io.sockets.emit('usernames', Object.keys(users));
+  socket.on('message', (msg)=> {
+    io.emit('message', msg);
+  });
+  socket.on('disconnect', function() {
+    console.log('[User Disconnected]');
   });
 });
 

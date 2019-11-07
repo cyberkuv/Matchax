@@ -1,6 +1,9 @@
 body {
   background-color: #465362 !important;
   color: #82A3A1 !important;
+  margin-bottom: 4vh !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Sedgwick Ave Display', cursive !important;
 }
 hr {
   background-color: #82A3A1;
@@ -13,6 +16,7 @@ hr {
 .navbar.navbar-expand-lg.navbar-light > img{
   width: 10%; 
 }
+
 .navbar-brand {
   margin: 5px 10px 5px 10px !important;
   color: #82A3A1 !important;
@@ -27,6 +31,7 @@ a.nav-link:hover {
 a.navbar-brand:hover {
   color: white !important;
 }
+
 input.form-control.mr-sm-2 {
   padding: 6px 5px 6px 5px !important;
 }
@@ -134,9 +139,9 @@ input.form-control.mr-sm-2 {
 /**/
 .footer {
   position: fixed;
-  left: 0;
   bottom: 0;
   width: 100%;
+  height: 4vh;
   background-color: #465362;
   text-align: center;
   font-weight: bold;
@@ -376,19 +381,15 @@ input.form-control.mr-sm-2 {
   background-size: contain;
   background-size: cover;
   height: 50%;
-  padding: 40px;
 }
 .about {
-  width: 50%;
-  height: 60%;
-  margin-top: 20%;
   background-color: #465362;
   border-radius: 6px;
-  padding: 5px;
+  padding: 18px;
   color: #82A3A1;
   text-align: center;
+  margin-top: 20%;
 }
-
 .name {
   width: 90%;
   position: absolute;
@@ -397,10 +398,14 @@ input.form-control.mr-sm-2 {
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-family: 'Sedgwick Ave Display', cursive;
-  font-size: 100;
+  font-size: 500%;
   color: white;
 }
 .name > img {
   width: 20%;
   filter: invert(100%);
+}
+.empty {
+  height: 10vh;
+  width: 100%;
 }

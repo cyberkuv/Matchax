@@ -1,4 +1,81 @@
 <div class="container">
+    <h1 class="display-4"><i class="fas fa-paper-plane"></i><%= user.username %> - Talk To Your Matches</h1><br>
+    <div class="">
+        <form action="">
+            <input id="sender" class="form-control" placeholder="Name" value="<%= user.username %>" readonly>
+            <br>
+            <input id="reciever" class="form-control" placeholder="Recievers username please">
+            <br>
+            <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
+            <br>
+            <button id="send" class="btn btn-success">Send</button>
+        </form>
+    </div><br>
+    <div id="messages">
+    </div>
+</div>
+<script>
+    $(() => {
+        $('#send').click(() => {
+            if ($('#sender').val() == $('#reciever').val() && $('#reciever').val('')) {
+                $('#reciever').val("Cannot send messages to yourself or no one for that matter!")
+            } else {
+                sendMessage({
+                    sender: $('#sender').val(),
+                    reciever: $('#reciever').val(),
+                    message: $('#message').val()
+                });
+            }
+        });
+        addMsgs();
+    });
+    function addMsgs() {
+        $('#messages').append(`
+        <% for(var x = 0; x < message.length; x++) { %>
+            <% if(message[x].sender == user.username || message[x].reciever == user.username) { %>
+                <div class="col">From: <%= message[x].sender %>, To: <%= message[x].reciever %>, Message: <%= message[x].message %></div>
+                <div class="col"></div>
+                <hr>
+            <% } %>
+        <% } %>
+        `);
+    }
+    function sendMessage(message) {
+        $.post('http://localhost:4000/chats', message);
+    }
+    $(() => {
+        var socket = io.connect();
+        $('form').submit((e)=> {
+            e.preventDefault();
+            socket.emit('sender', $('#sender').val());
+            socket.emit('reciever', $('#reciever').val());
+            socket.emit('message', $('#message').val());
+            $('#sender').val('');
+            $('#reciever').val('');
+            $('#message').val('');
+            return false;
+        });
+        socket.on('sender', (snd)=> {
+            socket.on('reciever', (recv)=> {
+                socket.on('message', (msg)=> {
+                    $('#messages').append("From: " + snd + ", To: " + recv + ", Message: " + msg + "<hr>");
+                });
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12">
@@ -17,8 +94,6 @@
         </div>
     </div>
 </div>
-
-<!-- messing around with actual chat view -->
 
 <div class="container">
     <div class="row chatbx">
@@ -40,8 +115,6 @@
         </div>
     </div>
 </div>
-
-<!-- messing around with actual chat view -->
 
 <script>
     jQuery(function($) {
@@ -85,4 +158,4 @@
                 + '</b>' + '</div>' + '<div class\="\msgDia">' + data.msg + '</div>' + '</div>' + '<br/>');
         });
     });
-</script>
+</script> -->

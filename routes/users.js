@@ -106,6 +106,7 @@ router.post('/signi', (req, res, next) => {
     failureRedirect: '/signi',
     failureFlash: true
   })(req, res, next);
+  req.flash('success_msg', 'You Are Logged In')
 });
 
 // Google Auth
@@ -113,14 +114,20 @@ router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 router.get('/google/callback', passport.authenticate('google'), (req, res)=> {
+  User.updateOne({googleId: req.user.googleId}, { active: true }, (err, res)=> {
+    if(err) throw err;
+  });
   res.redirect('/profile');
 });
 
 // Logout
 router.get('/logout', (req, res) => {
-  req.logout();
-  req.flash('success_msg', 'You are logged out');
-  res.redirect('/signi');
+  User.updateOne({_id: req.user._id}, { active: false }, (err, res)=> {
+    if(err) throw err;
+  });
+  req.logOut();
+  req.flash('success_msg', 'You Are Logged Out');
+  res.redirect('/');
 });
 
 module.exports = router;

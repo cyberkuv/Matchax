@@ -11,7 +11,7 @@ const usrSchema = new mongoose.Schema({
     username: { type: String, unique: true,  },
     password: { type: String, minlength: 6 },
     verified: { type: Boolean, default: false },
-    active: { type: Boolean, default: true },
+    active: { type: Boolean, default: false },
     prefAge: {
         min: { type: Number },
         max: { type: Number }
