@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Cookie Session
 app.use(cookie_session({
-  maxAge: 24 * 60 * 60 * 1000,
+  maxAge: 24 * 60 * 60 * 100,
   keys: [keys.session.cookieKey]
 }))
 

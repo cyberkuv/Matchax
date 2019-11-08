@@ -11,33 +11,37 @@
                                 matches[i].interest && matches[i].interest.third == user.interest.third ||
                                 matches[i].interest && matches[i].interest.fourth == user.interest.fourth ||
                                 matches[i].interest && matches[i].interest.fifth == user.interest.fifth) { %>
-    <div class="col-md-12">
-        <% if(matches[i].profilePic) { %>
-        <img style="border-radius: 10px; width: 50%;" src="<%= matches[i].profilePic %>" alt="profile pic">
-        <% } else { %>
-        <img style="border-radius: 10px; width: 50%; filter: invert(80%);"
-            src="https://icon-library.net/images/heart-icon-png-transparent/heart-icon-png-transparent-22.jpg"
-            alt="profile pic">
-        <% } %>
-        <hr>
-        <div class="col"><span>&bull;</span> Username: <%= matches[i].username %></div>
-        <div class="col"><span>&bull;</span> Firstname: <%= matches[i].firstname %></div>
-        <div class="col"><span>&bull;</span> Lastname: <%= matches[i].lastname %></div>
-        <div class="w-100"></div>
-        <div class="col"><span>&bull;</span> Age: <%= matches[i].age %></div>
-        <div class="col"><span>&bull;</span> Gender: <%= matches[i].gender %></div>
-        <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
-        <div class="col"><span>&bull;</span> Language: <%= matches[i].language %></div>
-        <div class="col"><span>&bull;</span> Ethnicity: <%= matches[i].ethnicity %></div>
-        <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
-        <div class="col"><span>&bull;</span> Resides in: <%= matches[i].countryOfResidence %>
+        <div class="row">
+            <div class="col-sm">
+                <% if(matches[i].profilePic) { %>
+                <img style="border-radius: 10px; width: 50%;" src="<%= matches[i].profilePic %>" alt="profile pic">
+                <% } else { %>
+                <img style="border-radius: 10px; width: 50%; filter: invert(80%);"
+                    src="https://icon-library.net/images/heart-icon-png-transparent/heart-icon-png-transparent-22.jpg"
+                    alt="profile pic">
+                <% } %>
+            </div>
+            <div class="col-sm">
+                <div class="col"><span>&bull;</span> Your database Id: <%= matches[i]._id %></div>
+                <div class="col"><span>&bull;</span> Username: <%= matches[i].username %></div>
+                <div class="col"><span>&bull;</span> Firstname: <%= matches[i].firstname %></div>
+                <div class="col"><span>&bull;</span> Lastname: <%= matches[i].lastname %></div>
+                <div class="w-100"></div>
+                <div class="col"><span>&bull;</span> Age: <%= matches[i].age %></div>
+                <div class="col"><span>&bull;</span> Gender: <%= matches[i].gender %></div>
+                <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
+                <div class="col"><span>&bull;</span> Language: <%= matches[i].language %></div>
+                <div class="col"><span>&bull;</span> Ethnicity: <%= matches[i].ethnicity %></div>
+                <div class="col"><span>&bull;</span> Nationality: <%= matches[i].nationality %></div>
+                <div class="col"><span>&bull;</span> Resides in: <%= matches[i].countryOfResidence %>
+                </div>
+                <div class="col"><span>&bull;</span> Bio: <%= matches[i].bio %></div>
+                <hr>
+                <div class="col">
+                    <button id="like" class="btn btn-success liked"><i class="fas fa-thumbs-up"></i> Like</button>
+                </div>
+            </div>
         </div>
-        <div class="col"><span>&bull;</span> Bio: <%= matches[i].bio %></div>
-        <hr>
-        <div class="col">
-            <button class="btn btn-success liked"><i class="fas fa-thumbs-up"></i> Like</button>
-        </div>
-    </div><br><br>
     <% } %>
     <% } %>
     <% } %>
@@ -45,6 +49,9 @@
     <% } %>
 </div>
 <script>
+    $(()=> {
+        $('#like').click(()=> {});
+    });
     $(function () {
         $('.liked').on('click', function () {
             let val = parseInt($('.likes').text());
@@ -55,30 +62,5 @@
             }
         });
     });
-
-    function calcDis(lat1, lon1, lat2, lon2, unit) {
-        if ((lat1 == lat2) && (lon1 == lon2)) {
-            return 0;
-        } else {
-            var rdlt1 = Math.PI * lat1 / 180;
-            var rdlt2 = Math.PI * lat2 / 180;
-            var dflon = lon1 - lon2;
-            var rddflon = Math.PI * dflon / 180;
-            var dsn = Math.sin(rdlt1) * Math.sin(rdlt2) + Math.cos(rdlt1) * Math.cos(rdlt2) * Math.cos(rddflon);
-            if (dsn > 1) {
-                dsn = 1;
-            }
-            dsn = Math.acos(dsn);
-            dsn = dsn * 180 / Math.PI;
-            dsn = dsn * 60 * 1.1515;
-            if (unit == "K") {
-                dsn = dsn * 1.609344;
-            }
-            if (unit == "N") {
-                dsn = dsn * 0.8684;
-            }
-            return dsn;
-        }
-    }
 </script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>

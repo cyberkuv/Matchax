@@ -174,6 +174,16 @@ router.get('/matches', ensureAuthenticated, (req, res)=> {
   });
 });
 
+const Likes = require('../models/likes');
+router.post('/likes', ensureAuthenticated, (req, res)=> {
+  var like = new Likes(req.body);
+  like.save((err)=> {
+    if(err)
+      sendStatus(500);
+    res.sendStatus(200);
+  });
+});
+
 const Message = require('../models/message');
 
 router.get('/chats', ensureAuthenticated, (req, res)=> {
